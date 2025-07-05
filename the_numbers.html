@@ -1,0 +1,62 @@
+<!doctype html>
+
+<html>
+    <head>
+        <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>The Numbers</title>
+
+        <!-- Load external CSS styles -->
+        <link rel="stylesheet" href="styles.css">
+
+    </head>
+
+    <body>
+
+        <h1 id=h1>The Numbers</h1>
+        
+		<div class="container">
+            <div class="image-container">
+                <img src="images/left.jpg" alt="Left Image" class="image">
+            </div>
+            <div class="center-container">
+                <div class="numbers-container">
+                    <div id="1" onclick="addNumber('1')" onpointerover="pointerOver('1')" onpointerleave="pointerLeave('1')">1</div>
+                    <div id="2" onclick="addNumber('2')" onpointerover="pointerOver('2')" onpointerleave="pointerLeave('2')">2</div>
+                    <div id="3" onclick="addNumber('3')" onpointerover="pointerOver('3')" onpointerleave="pointerLeave('3')">3</div>
+                    <div id="4" onclick="addNumber('4')" onpointerover="pointerOver('4')" onpointerleave="pointerLeave('4')">4</div>
+                    <div id="5" onclick="addNumber('5')" onpointerover="pointerOver('5')" onpointerleave="pointerLeave('5')">5</div>
+                    <div id="6" onclick="addNumber('6')" onpointerover="pointerOver('6')" onpointerleave="pointerLeave('6')">6</div>
+                    <div id="7" onclick="addNumber('7')" onpointerover="pointerOver('7')" onpointerleave="pointerLeave('7')">7</div>
+                    <div id="8" onclick="addNumber('8')" onpointerover="pointerOver('8')" onpointerleave="pointerLeave('8')">8</div>
+                    <div id="9" onclick="addNumber('9')" onpointerover="pointerOver('9')" onpointerleave="pointerLeave('9')">9</div>
+                    <div id="0" onclick="addNumber('0')" onpointerover="pointerOver('0')" onpointerleave="pointerLeave('0')">0</div>
+                </div>
+                <div class="additional-container">
+                    <!-- First row -->
+                    <div class="numbers"><p id="firstNumber"></p></div>
+                    <div><p id="operator"></p></div>
+                    <div class="numbers"><p id="secondNumber"></p></div>
+                    <div><p>=</p></div>
+                    <div class="numbers"><p id="result" class="result"></p></div>
+                    <div id="clear" class="clear" onclick="clearResult()" onpointerover="pointerOver('clear')" onpointerleave="pointerLeave('clear')"><p>Clear</p></div>
+                    <!-- Second row -->
+                    <div class="numbers"><img id="imgFirstNumber" onpointerover="imgPointerOver('imgFirstNumber')" onpointerleave="imgPointerLeave('imgFirstNumber')" src=""></div>
+                    <div><p>+</p></div>
+                    <div class="numbers"><img id="imgSecondNumber" onpointerover="imgPointerOver('imgSecondNumber')" onpointerleave="imgPointerLeave('imgSecondNumber')" src=""></div>
+                    <div><p>=</p></div>
+                    <div class="numbers"><img id="imgResultNumber" onpointerover="imgPointerOver('imgResultNumber')" onpointerleave="imgPointerLeave('imgResultNumber')" src=""></div>
+                    <div id="enter" class="enter" onclick="checkResult()" onpointerover="pointerOver('enter')" onpointerleave="pointerLeave('enter')"><p>Enter</p></div>
+                </div>
+                <div id="star" class="star"></div>
+            </div>
+			<div class="image-container">
+                <img src="images/right.jpg" alt="Right Image" class="image">
+            </div>
+		</div>
+		
+        <!-- Load external JavaScript -->
+        <script src="scripts.js"></script>
+        
+    </body>
+
+</html>
