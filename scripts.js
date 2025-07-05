@@ -27,6 +27,31 @@ function resetNumbers() {
     document.getElementById('imgResultNumber').src = `images/block.png`;
 }
 
+function imgClick(element) {
+    if (element === 'imgFirstNumber') {
+        if (firstNumber > 12) {
+            document.getElementById(element).src = `images/13.png`;
+        }
+        else {
+            document.getElementById(element).src = `images/${firstNumber}.png`;
+        }
+    } else if (element === 'imgSecondNumber') {
+        if (secondNumber > 12) {
+            document.getElementById(element).src = `images/13.png`;
+        }
+        else {
+            document.getElementById(element).src = `images/${secondNumber}.png`;
+        }
+    } else if (element === 'imgResultNumber') {
+        if (firstNumber + secondNumber > 12) {
+            document.getElementById(element).src = `images/13.png`;
+        }
+        else {
+            document.getElementById(element).src = `images/${firstNumber + secondNumber}.png`;
+        }
+    }
+}
+
 function imgPointerOver(element) {
     if (element === 'imgFirstNumber') {
         if (firstNumber > 12) {
