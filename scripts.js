@@ -53,6 +53,7 @@ function imgClick(element) {
 }
 
 function imgPointerOver(element) {
+    /*
     if (element === 'imgFirstNumber') {
         if (firstNumber > 12) {
             document.getElementById(element).src = `images/13.png`;
@@ -75,10 +76,13 @@ function imgPointerOver(element) {
             document.getElementById(element).src = `images/${firstNumber + secondNumber}.png`;
         }
     }
+    */
 }
 
 function imgPointerLeave(element) {
+    /*
     document.getElementById(element).src = `images/block.png`;
+    */
 }
 
 function addNumber(element){
