@@ -34,17 +34,17 @@
                 <div class="additional-container">
                     <!-- First row -->
                     <div class="numbers"><p id="firstNumber"></p></div>
-                    <div><p id="operator"></p></div>
+                    <div><p id="operator1"></p></div>
                     <div class="numbers"><p id="secondNumber"></p></div>
                     <div><p>=</p></div>
                     <div class="numbers"><p id="result" class="result"></p></div>
                     <div id="clear" class="clear" onclick="clearResult()" onpointerover="pointerOver('clear')" onpointerleave="pointerLeave('clear')"><p>Clear</p></div>
                     <!-- Second row -->
-                    <div class="numbers"><img id="imgFirstNumber" onclick = "imgClick('imgFirstNumber')" onpointerover="imgPointerOver('imgFirstNumber')" onpointerleave="imgPointerLeave('imgFirstNumber')" src=""></div>
-                    <div><p>+</p></div>
-                    <div class="numbers"><img id="imgSecondNumber" onclick = "imgClick('imgSecondNumber')" onpointerover="imgPointerOver('imgSecondNumber')" onpointerleave="imgPointerLeave('imgSecondNumber')" src=""></div>
+                    <div id="imgFirstNumberDiv" class="imgNumbers" onclick="imgClick('imgFirstNumber')" onpointerover="pointerOver('imgFirstNumberDiv')" onpointerleave="pointerLeave('imgFirstNumberDiv')" ><img id="imgFirstNumber" src=""></div>
+                    <div><p id="operator2"></p></div>
+                    <div id="imgSecondNumberDiv" class="imgNumbers" onclick="imgClick('imgSecondNumber')" onpointerover="pointerOver('imgSecondNumberDiv')" onpointerleave="pointerLeave('imgSecondNumberDiv')"><img id="imgSecondNumber" src=""></div>
                     <div><p>=</p></div>
-                    <div class="numbers"><img id="imgResultNumber" onclick = "imgClick('imgResultNumber')" onpointerover="imgPointerOver('imgResultNumber')" onpointerleave="imgPointerLeave('imgResultNumber')" src=""></div>
+                    <div id="imgResultNumberDiv" class="imgNumbers" onclick="imgClick('imgResultNumber')" onpointerover="pointerOver('imgResultNumberDiv')" onpointerleave="pointerLeave('imgResultNumberDiv')"><img id="imgResultNumber" src=""></div>
                     <div id="enter" class="enter" onclick="checkResult()" onpointerover="pointerOver('enter')" onpointerleave="pointerLeave('enter')"><p>Enter</p></div>
                 </div>
                 <div id="star" class="star"></div>

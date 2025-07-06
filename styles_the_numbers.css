@@ -3,21 +3,24 @@
 * {
   margin: 0;
   box-sizing: border-box;
+  font-size: 6vw;
+  text-align: center;
 }
 
 h1 {
     text-align: center;
     font-family: "Monotype Corsiva", cursive;
     font-weight: bold;
+    font-size: 4vw;
 }
 
 img {
-  width: 200px;
-  height: auto;
+  width: 10vw;
+  height: 15vw;
 }
 
 .image {
-  width: 120px;
+  width: 7.5vw;
   height: auto;
 }
 
@@ -25,66 +28,54 @@ img {
   display: grid;
   grid-template-columns: min-content auto min-content;
   background-color: rgb(235, 145, 10);
-  padding: 10px;
+  padding: 0.5vw;
 }
 
 .numbers-container {
   display: grid;
   grid-template-columns: auto auto auto auto auto auto auto auto auto auto;
-  padding: 10px;
+  padding: 0.5vw;
 }
 
 .numbers-container > div {
   background-color: yellow;
-  border: 2px solid white;
-  font-size: 40px;
-  text-align: center;
-  margin: 4px;
+  border: 0.2vw solid white;
+  margin: 0.5vw;
 }
 
 .enter {
   background-color: green;
-  border: 2px solid white;
-  font-size: 40px;
-  text-align: center;
-  margin: 4px;
+  border: 0.2vw solid white;
+  margin: 0.5vw;
+}
+
+.clear {
+  background-color: yellow;
+  border: 0.2vw solid white;
+  margin: 0.5vw;
 }
 
 .additional-container {
   display: grid;
   grid-template-columns: auto auto auto auto auto auto;
-  grid-template-rows: auto auto;
-  padding: 10px;
-  font-size: 80px;
-  text-align: center;
+  grid-template-rows: 8vw 18vw;
+  padding: 4vwx;
 }
 
 .numbers {
   background-color: rgb(36, 196, 218);
-  border: 2px solid white;
-  font-size: 80px;
-  text-align: center;
-  margin: 4px;
+  border: none;
+  margin: 0.5vw;
 }
 
-.clear {
-  background-color: yellow;
-  border: 2px solid white;
-  font-size: 40px;
-  text-align: center;
-  margin: 4px;
+.imgNumbers {
+  background-color: rgb(36, 196, 218);
+  border: 0.2vw solid white;
+  margin: 0.5vw;
 }
 
 @media only screen and (max-width: 1024px) {
   h1 {
     background-color: rgb(36, 196, 218);
-  }
-  .image {
-    width: 0px;
-    height: auto;
-  }
-  img {
-    width: 100px;
-    height: auto;
   }
 }

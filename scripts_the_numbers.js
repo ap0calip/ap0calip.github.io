@@ -4,7 +4,7 @@
  * A simple math game where users can practice addition.
  * This script generates random numbers and displays them for the user to solve.
  */
-let operator = '+';
+let operator = '+'; // Change this to '+', '-', '*', or '/' for different operations
 let level = 10;
 
 window.onload = function() {
@@ -15,12 +15,27 @@ let firstNumber = 0;
 let secondNumber = 0;
 
 function resetNumbers() {
-    firstNumber = Math.floor((Math.random() * level) + 1);
-    secondNumber = Math.floor((Math.random() * level) + 1);
-
+    if (operator === '+') {
+        firstNumber = Math.floor((Math.random() * level) + 1);
+        secondNumber = Math.floor((Math.random() * (level - firstNumber)) + 1);
+    }
+    else if (operator === '-') {
+        firstNumber = Math.floor((Math.random() * level) + 1);
+        secondNumber = Math.floor((Math.random() * firstNumber) + 1);
+    }
+    else if (operator === '*') {
+        firstNumber = Math.floor((Math.random() * level) + 1);
+        secondNumber = Math.floor((Math.random() * level) + 1);
+    }
+    else if (operator === '/') {
+        secondNumber = Math.floor((Math.random() * level) + 1);
+        firstNumber = secondNumber * Math.floor((Math.random() * level) + 1);
+    }
+    // Update the HTML elements with the new numbers and operator
     document.getElementById('firstNumber').innerHTML = firstNumber;
     document.getElementById('secondNumber').innerHTML = secondNumber;
-    document.getElementById('operator').innerHTML = operator;
+    document.getElementById('operator1').innerHTML = operator;
+    document.getElementById('operator2').innerHTML = operator;
 
     document.getElementById('imgFirstNumber').src = `images/block.png`;
     document.getElementById('imgSecondNumber').src = `images/block.png`;
@@ -50,39 +65,11 @@ function imgClick(element) {
             document.getElementById(element).src = `images/${firstNumber + secondNumber}.png`;
         }
     }
+    const intervalID = setInterval(imgLeave, 10000, element);
 }
 
-function imgPointerOver(element) {
-    /*
-    if (element === 'imgFirstNumber') {
-        if (firstNumber > 12) {
-            document.getElementById(element).src = `images/13.png`;
-        }
-        else {
-            document.getElementById(element).src = `images/${firstNumber}.png`;
-        }
-    } else if (element === 'imgSecondNumber') {
-        if (secondNumber > 12) {
-            document.getElementById(element).src = `images/13.png`;
-        }
-        else {
-            document.getElementById(element).src = `images/${secondNumber}.png`;
-        }
-    } else if (element === 'imgResultNumber') {
-        if (firstNumber + secondNumber > 12) {
-            document.getElementById(element).src = `images/13.png`;
-        }
-        else {
-            document.getElementById(element).src = `images/${firstNumber + secondNumber}.png`;
-        }
-    }
-    */
-}
-
-function imgPointerLeave(element) {
-    /*
+function imgLeave(element) {
     document.getElementById(element).src = `images/block.png`;
-    */
 }
 
 function addNumber(element){
@@ -106,7 +93,7 @@ function pointerLeave(element) {
 
 function checkResult() {
     let result = document.getElementById('result').innerHTML;
-    let correctResult = firstNumber + secondNumber;
+    let correctResult = eval(`${firstNumber} ${operator} ${secondNumber}`);
     if (parseInt(result) === correctResult) {
         let star = document.getElementById('star');
         let img = document.createElement('img');

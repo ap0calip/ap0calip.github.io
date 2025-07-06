@@ -1,19 +1,24 @@
+
 body {
     background-color: black;
 }
 
 .logo {
-    width: 100%;
+    width: 50%;
     height: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 h3 {
     color: white;
-    font-size: 10vw;
+    font-size: 5vw;
     text-align: left;
 }
 
 ul {
     color: white;
-    font-size: 10vw;
+    font-size: 5vw;
+    list-style-position: inside;
 }
