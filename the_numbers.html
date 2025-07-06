@@ -34,6 +34,13 @@
                     <option value="3">Hard 100</option>
                 </select>
             </div>
+            <div>
+                <label for="genderSelect">Gender:</label>
+                <select id="genderSelect" onchange="onGenderChange()">
+                    <option value="boy">Boy</option>
+                    <option value="girl">Girl</option>
+                </select>
+            </div>
         </div>
         
         <div class="container">
@@ -69,13 +76,19 @@
                     <div id="imgResultNumberDiv" class="imgNumbers" onclick="imgClick('imgResultNumber')" onpointerover="pointerOver('imgResultNumberDiv')" onpointerleave="pointerLeave('imgResultNumberDiv')"><img id="imgResultNumber" src=""></div>
                     <div id="enter" class="enter" onclick="checkResult()" onpointerover="pointerOver('enter')" onpointerleave="pointerLeave('enter')"><p>Enter</p></div>
                 </div>
-                <div id="star" class="star"></div>
+                <div id="starContainer" class="star-container"></div>
             </div>
             <div class="image-container">
                 <img src="images/right.jpg" alt="Right Image" class="imgBorder">
             </div>
         </div>
-        
+
+        <div id="giftContainer" class="gift-container"></div>
+
+        <div class="footer">
+            <p>© 2025 ap0calip</p>
+        </div>
+
         <!-- Load external JavaScript -->
         <script src="scripts_the_numbers.js"></script>
         

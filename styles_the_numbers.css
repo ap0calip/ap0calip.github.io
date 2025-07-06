@@ -11,7 +11,7 @@ label, select, .menu-bar, option {
   display: inline-flex;
   justify-content: center;
   align-items: end;
-  gap: 6vw;
+  gap: 1vw;
   font-family: "Monotype Corsiva", cursive;
   font-weight: bold;
   font-size: 2vw;
@@ -33,6 +33,11 @@ img {
 
 .imgStar {
   width: 10vw;
+  height: auto;
+}
+
+.imgGift {
+  width: 20vw;
   height: auto;
 }
 
