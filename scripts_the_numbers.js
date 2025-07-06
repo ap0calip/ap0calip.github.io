@@ -5,6 +5,11 @@
  * This script generates random numbers and displays them for the user to solve.
  */
 
+// Prevent the browser from navigating away without confirmation
+window.addEventListener('beforeunload', function (e) {
+  e.preventDefault();
+});
+
 let operator = '+'; // Default operator
 let operatorView = '+'; // Default operator view
 let level = 10;     // Default level (Easy)
