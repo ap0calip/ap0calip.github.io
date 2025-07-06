@@ -4,8 +4,39 @@
  * A simple math game where users can practice addition.
  * This script generates random numbers and displays them for the user to solve.
  */
-let operator = '+'; // Change this to '+', '-', '*', or '/' for different operations
-let level = 10;
+
+let operator = '+'; // Default operator
+let operatorView = '+'; // Default operator view
+let level = 10;     // Default level (Easy)
+
+// Handle operator change from dropdown
+function onOperatorChange() {
+    const op = document.getElementById('operatorSelect').value;
+    operator = op;
+    if (op === '+') {
+        operatorView = '+';
+    }
+    else if (op === '-') {
+        operatorView = '-';
+    }
+    else if (op === '*') {
+        operatorView = '×';
+    }
+    else if (op === '/') {
+        operatorView = '÷';
+    }
+    resetNumbers();
+}
+
+// Handle level change from dropdown
+function onLevelChange() {
+    const lvl = document.getElementById('levelSelect').value;
+    // Level 1: 0-10, Level 2: 0-12, Level 3: 0-100
+    if (lvl === '1') level = 10;
+    else if (lvl === '2') level = 12;
+    else if (lvl === '3') level = 100;
+    resetNumbers();
+}
 
 window.onload = function() {
     resetNumbers();
@@ -28,18 +59,21 @@ function resetNumbers() {
         secondNumber = Math.floor(Math.random() * (level + 1));
     }
     else if (operator === '/') {
-        secondNumber = Math.floor(Math.random() * (level + 1));
+        secondNumber = Math.floor((Math.random() * level) + 1); // Avoid division by zero
         firstNumber = secondNumber * (Math.floor(Math.random() * (level + 1)));
     }
     // Update the HTML elements with the new numbers and operator
     document.getElementById('firstNumber').innerHTML = firstNumber;
     document.getElementById('secondNumber').innerHTML = secondNumber;
-    document.getElementById('operator1').innerHTML = operator;
-    document.getElementById('operator2').innerHTML = operator;
+    document.getElementById('operator1').innerHTML = operatorView;
+    document.getElementById('operator2').innerHTML = operatorView;
 
     document.getElementById('imgFirstNumber').src = `images/block.png`;
     document.getElementById('imgSecondNumber').src = `images/block.png`;
     document.getElementById('imgResultNumber').src = `images/block.png`;
+
+    // Reset the result display
+    document.getElementById('result').innerHTML = '';
 }
 
 function imgClick(element) {
@@ -58,11 +92,11 @@ function imgClick(element) {
             document.getElementById(element).src = `images/${secondNumber}.png`;
         }
     } else if (element === 'imgResultNumber') {
-        if (firstNumber + secondNumber > 12) {
+        if (eval(`${firstNumber} ${operator} ${secondNumber}`) > 12) {
             document.getElementById(element).src = `images/13.png`;
         }
         else {
-            document.getElementById(element).src = `images/${firstNumber + secondNumber}.png`;
+            document.getElementById(element).src = "images/" + eval(`${firstNumber} ${operator} ${secondNumber}`) + ".png";
         }
     }
     const intervalID = setTimeout(imgLeave, 10000, element);
@@ -99,12 +133,14 @@ function checkResult() {
         let img = document.createElement('img');
         img.src = 'images/star.png'; // Change to your actual image path
         img.alt = 'Star';
+        img.className = 'imgStar';
         star.appendChild(img);
         resetNumbers();
-        clearResult();
     } else {
         alert(`Incorrect! The correct answer is ${correctResult}.`);
-        resetNumbers();
-        clearResult();
-    }
+        let star = document.getElementsByClassName('imgStar');
+        if (star.length > 0) {
+            star[star.length - 1].remove(); // Remove the last star if the answer is incorrect
+        }
+        resetNumbers();    }
 }

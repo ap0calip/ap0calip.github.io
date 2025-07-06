@@ -7,11 +7,18 @@
   text-align: center;
 }
 
+label, select, .menu-bar {
+  display: inline-flex;
+  justify-content: center;
+  align-items: end;
+  gap: 6vw;
+  font-family: "Monotype Corsiva", cursive;
+  font-weight: bold;
+  font-size: 2vw;
+}
+
 h1 {
-    text-align: center;
-    font-family: "Monotype Corsiva", cursive;
-    font-weight: bold;
-    font-size: 4vw;
+  font-size: 4vw;
 }
 
 img {
@@ -19,8 +26,13 @@ img {
   height: 15vw;
 }
 
-.image {
-  width: 7.5vw;
+.imgBorder {
+  width: 7vw;
+  height: auto;
+}
+
+.imgStar {
+  width: 10vw;
   height: auto;
 }
 
@@ -72,10 +84,4 @@ img {
   background-color: rgb(36, 196, 218);
   border: 0.2vw solid white;
   margin: 0.5vw;
-}
-
-@media only screen and (max-width: 1024px) {
-  h1 {
-    background-color: rgb(36, 196, 218);
-  }
 }

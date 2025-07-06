@@ -12,11 +12,33 @@
 
     <body>
 
-        <h1 id=h1>The Numbers</h1>
         
-		<div class="container">
+
+        <!-- Operator and Level Selection Menu -->
+        <div class="menu-bar">
+            <h1>The Numbers</h1>
+            <div>
+                <label for="operatorSelect">Operator:</label>
+                <select id="operatorSelect" onchange="onOperatorChange()">
+                    <option value="+">+</option>
+                    <option value="-">-</option>
+                    <option value="*">×</option>
+                    <option value="/">÷</option>
+                </select>
+            </div>
+            <div>
+                <label for="levelSelect">Level:</label>
+                <select id="levelSelect" onchange="onLevelChange()">
+                    <option value="1">Easy 10</option>
+                    <option value="2">Medium 12</option>
+                    <option value="3">Hard 100</option>
+                </select>
+            </div>
+        </div>
+        
+        <div class="container">
             <div class="image-container">
-                <img src="images/left.jpg" alt="Left Image" class="image">
+                <img src="images/left.jpg" alt="Left Image" class="imgBorder">
             </div>
             <div class="center-container">
                 <div class="numbers-container">
@@ -49,11 +71,11 @@
                 </div>
                 <div id="star" class="star"></div>
             </div>
-			<div class="image-container">
-                <img src="images/right.jpg" alt="Right Image" class="image">
+            <div class="image-container">
+                <img src="images/right.jpg" alt="Right Image" class="imgBorder">
             </div>
-		</div>
-		
+        </div>
+        
         <!-- Load external JavaScript -->
         <script src="scripts_the_numbers.js"></script>
         
