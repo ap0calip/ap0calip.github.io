@@ -20,16 +20,16 @@ function resetNumbers() {
         secondNumber = Math.floor(Math.random() * (level - firstNumber + 1));
     }
     else if (operator === '-') {
-        firstNumber = Math.floor((Math.random() * (level + 1)));
-        secondNumber = Math.floor((Math.random() * (firstNumber + 1)));
+        firstNumber = Math.floor(Math.random() * (level + 1));
+        secondNumber = Math.floor(Math.random() * (firstNumber + 1));
     }
     else if (operator === '*') {
-        firstNumber = Math.floor((Math.random() * (level + 1)));
-        secondNumber = Math.floor((Math.random() * (level + 1)));
+        firstNumber = Math.floor(Math.random() * (level + 1));
+        secondNumber = Math.floor(Math.random() * (level + 1));
     }
     else if (operator === '/') {
-        secondNumber = Math.floor((Math.random() * (level + 1))) + 1);
-        firstNumber = secondNumber * (Math.floor((Math.random() * (level + 1))) + 1);
+        secondNumber = Math.floor(Math.random() * (level + 1));
+        firstNumber = secondNumber * (Math.floor(Math.random() * (level + 1)));
     }
     // Update the HTML elements with the new numbers and operator
     document.getElementById('firstNumber').innerHTML = firstNumber;
