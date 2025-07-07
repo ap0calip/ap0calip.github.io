@@ -1,4 +1,8 @@
 
+* {
+    color: white;
+}
+
 body {
     background-color: black;
 }
@@ -11,14 +15,8 @@ body {
     margin-right: auto;
 }
 
-h3 {
-    color: white;
-    font-size: 5vw;
-    text-align: left;
-}
-
 ul {
     color: white;
-    font-size: 5vw;
+    font-size: 4vw;
     list-style-position: inside;
 }
