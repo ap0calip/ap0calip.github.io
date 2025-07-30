@@ -91,7 +91,11 @@
 
         <!-- Load external JavaScript -->
         <script src="scripts_the_numbers.js"></script>
-        
+        <script>
+            if (typeof navigator.serviceWorker !== 'undefined') {
+                navigator.serviceWorker.register('service-worker.js')
+            }
+        </script>
     </body>
 
 </html>
