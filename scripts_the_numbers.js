@@ -22,6 +22,32 @@ let operatorView = '+'; // Default operator view
 let level = 10;     // Default level (Easy)
 let stickerFolder = 'BoySticker/'; // Folder for sticker images
 
+document.addEventListener("keydown", function(event) {
+  if (isDigit(event.key)) {
+    addNumber(event.key);
+  }
+    else if (event.key === 'Enter') {
+        checkResult();
+    }
+    else if (event.key === 'Escape') {
+        clearResult();
+    }
+    else if (event.key === 'Backspace' || event.key === 'Delete') {
+        let result = document.getElementById('result').innerHTML;
+        result = result.slice(0, -1); // Remove the last character
+        document.getElementById('result').innerHTML = result;
+    }
+    else if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+        // Prevent default behavior of arrow keys
+        event.preventDefault();
+    }
+});
+
+function isDigit(key) {
+  return /^[0-9]$/.test(key); // Accepts only single digits 0–9
+}
+
+
 // Handle operator change from dropdown
 function onOperatorChange() {
     const op = document.getElementById('operatorSelect').value;
