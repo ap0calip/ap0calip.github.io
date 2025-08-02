@@ -16,7 +16,7 @@ const soundNegative = new Audio('sound/sound_negative.mp3');
 const soundSticker = new Audio('sound/sound_sticker.mp3');
 
 const maxStars = 8; // Maximum number of stars allowed, default is 8
-const maxGifts = 20; // Maximum number of gifts allowed, default is 20
+const maxSticker = 20; // Maximum number of gifts allowed, default is 20
 let operator = '+'; // Default operator
 let operatorView = '+'; // Default operator view
 let level = 10;     // Default level (Easy)
@@ -191,8 +191,8 @@ function checkResult() {
             starContainer.appendChild(img);
         }
         else {
-            if (imgSticker.length > maxGifts) {
-                alert(`You have already earned the maximum number of sticker! (${maxGifts})`);
+            if (imgSticker.length > maxSticker) {
+                alert(`You have already earned the maximum number of sticker! (${maxSticker})`);
             }
             else {
                 soundSticker.play(); // Play sticker sound effect
@@ -204,7 +204,7 @@ function checkResult() {
                 img.alt = 'Sticker';
                 img.className = 'imgSticker';
                 stickerContainer.appendChild(img);
-                alert(`See your sticker below! (${imgSticker.length + 1})`);
+                alert(`See your sticker below!`);
             }
         }
         resetNumbers();
