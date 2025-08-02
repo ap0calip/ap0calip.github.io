@@ -10,12 +10,17 @@ window.addEventListener('beforeunload', function (e) {
   e.preventDefault();
 });
 
+// Add sound effect on button click
+const soundPositive = new Audio('sound/sound_positive.mp3');
+const soundNegative = new Audio('sound/sound_negative.mp3');
+const soundSticker = new Audio('sound/sound_sticker.mp3');
+
 const maxStars = 8; // Maximum number of stars allowed, default is 8
 const maxGifts = 20; // Maximum number of gifts allowed, default is 20
 let operator = '+'; // Default operator
 let operatorView = '+'; // Default operator view
 let level = 10;     // Default level (Easy)
-let giftFolder = 'BoyGift/'; // Folder for gift images
+let stickerFolder = 'BoySticker/'; // Folder for sticker images
 
 // Handle operator change from dropdown
 function onOperatorChange() {
@@ -49,9 +54,9 @@ function onLevelChange() {
 function onGenderChange() {
     const gender = document.getElementById('genderSelect').value;
     if (gender === 'boy') {
-        giftFolder = 'BoyGift/';
+        stickerFolder = 'BoySticker/';
     } else if (gender === 'girl') {
-        giftFolder = 'GirlGift/';
+        stickerFolder = 'GirlSticker/';
     }
     resetNumbers();
 }
@@ -147,11 +152,12 @@ function checkResult() {
     let result = document.getElementById('result').innerHTML;
     let correctResult = eval(`${firstNumber} ${operator} ${secondNumber}`);
     const imgStar = document.getElementsByClassName('imgStar');
-    const imgGift = document.getElementsByClassName('imgGift');
+    const imgSticker = document.getElementsByClassName('imgSticker');
     const starContainer = document.getElementById('starContainer');
-    const giftContainer = document.getElementById('giftContainer');
+    const stickerContainer = document.getElementById('stickerContainer');
     if (parseInt(result) === correctResult) {
         if( imgStar.length < maxStars ) {
+            soundPositive.play(); // Play positive sound effect
             let img = document.createElement('img');
             img.src = 'images/star.png'; // Change to your actual image path
             img.alt = 'Star';
@@ -159,22 +165,26 @@ function checkResult() {
             starContainer.appendChild(img);
         }
         else {
-            if (imgGift.length > maxGifts) {
-                alert(`You have already earned the maximum number of gifts! (${maxGifts})`);
+            if (imgSticker.length > maxGifts) {
+                alert(`You have already earned the maximum number of sticker! (${maxGifts})`);
             }
             else {
+                soundSticker.play(); // Play sticker sound effect
                 while (imgStar.length > 0) {
                     imgStar[imgStar.length - 1].remove();
                 }
                 let img = document.createElement('img');
-                img.src = `${giftFolder}${imgGift.length + 1}.png`; // Change to your actual image path
-                img.alt = 'Gift';
-                img.className = 'imgGift';
-                giftContainer.appendChild(img);
+                img.src = `${stickerFolder}${imgSticker.length + 1}.png`; // Change to your actual image path
+                img.alt = 'Sticker';
+                img.className = 'imgSticker';
+                stickerContainer.appendChild(img);
+                alert(`See your sticker below! (${imgSticker.length + 1})`);
             }
         }
         resetNumbers();
     } else {
+        soundNegative.play(); // Play negative sound effect
+        // Show an alert with the correct answer
         alert(`Incorrect! The correct answer is ${correctResult}.`);
         if (imgStar.length > 0) {
             imgStar[imgStar.length - 1].remove(); // Remove the last star if the answer is incorrect
