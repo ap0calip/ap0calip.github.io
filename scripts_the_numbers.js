@@ -175,6 +175,11 @@ function pointerLeave(element) {
 }
 
 function checkResult() {
+    // Pause all sound effects to avoid overlap
+    soundPositive.pause();
+    soundNegative.pause();
+    soundSticker.pause();
+    
     let result = document.getElementById('result').innerHTML;
     let correctResult = eval(`${firstNumber} ${operator} ${secondNumber}`);
     const imgStar = document.getElementsByClassName('imgStar');
