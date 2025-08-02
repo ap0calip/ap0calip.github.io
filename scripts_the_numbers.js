@@ -183,6 +183,7 @@ function checkResult() {
     const stickerContainer = document.getElementById('stickerContainer');
     if (parseInt(result) === correctResult) {
         if( imgStar.length < maxStars ) {
+            soundPositive.currentTime = 0; // Ensure sound starts from the beginning
             soundPositive.play(); // Play positive sound effect
             let img = document.createElement('img');
             img.src = 'images/star.png'; // Change to your actual image path
@@ -209,6 +210,7 @@ function checkResult() {
         }
         resetNumbers();
     } else {
+        soundNegative.currentTime = 0; // Ensure sound starts from the beginning
         soundNegative.play(); // Play negative sound effect
         // Show an alert with the correct answer
         alert(`Incorrect! The correct answer is ${correctResult}.`);
