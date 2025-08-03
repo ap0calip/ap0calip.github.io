@@ -1,62 +1,22 @@
 {
-"iarc_rating_id": "b48b9f6c-0888-4d9b-8eb4-c61f6142e020",
-    "shortcuts": [
-  {
-    "name": "Start Live Session",
-    "short_name": "Start Live",
-    "description": "Jump direction into starting or joining a live session",
-    "url": "/?startLive",
-    "icons": [
+  "name": "The Numbers PWA forcomputer",
+  "short_name": "TheNumbers",
+  "icons": [
       {
-        "src": "https://ap0calip.github.io/images/192x192.png",
-        "sizes": "192x192"
+          "src": "https://ap0calip.github.io/images/512x512.png",
+          "sizes": "512x512",
+          "type": "image/png",
+          "purpose": "maskable"
+      },
+      {
+          "src": "https://ap0calip.github.io/images/192x192.png",
+          "sizes": "192x192",
+          "type": "image/png",
+          "purpose": "any"
       }
-    ]
-  }
-], 
-"display_override": ["window-controls-overlay"], 
-"protocol_handlers": [{"protocol":"mailto","url":"/newEmail?to=%s"}], 
-"name": "The Numbers PWA forcomputer",
-"short_name": "The Numbers PWA forcomputer",
-"version": "1.0.2",
-"start_url": "https://ap0calip.github.io/the_numbers.html",
-"display": "standalone",
-"description": "The Numbers is a Progressive Web App that allows users to explore and interact with various numerical data in an engaging way.",
-"id": "/?homescreen=1",
-"scope": "https://ap0calip.github.io/",
-"lang": "en-US",
-"dir": "auto",
-"theme_color": "#000000",
-"background_color": "#000000",
-"orientation": "any",
-"icons": [
-    {
-        "src": "https://ap0calip.github.io/images/512x512.png",
-        "sizes": "512x512",
-        "type": "image/png",
-        "purpose": "maskable"
-    },
-    {
-        "src": "https://ap0calip.github.io/images/192x192.png",
-        "sizes": "192x192",
-        "type": "image/png",
-        "purpose": "any"
-    }
-],
-"screenshots": [
-    {
-        "src": "https://ap0calip.github.io/images/SuperHeroArt.png",
-        "sizes": "2880x1800",
-        "type": "image/png",
-        "description": "A screenshot of the home page"
-    }
-],
-"related_applications": [
-    {
-        "platform":"windows",
-        "url": "https://apps.microsoft.com/detail/9nqz63lkldpp?hl=en-US&gl=US"
-    }
-],
-"prefer_related_applications": false,
- "categories": ["education","games","kids"]
+  ],
+  "start_url": "https://ap0calip.github.io/the_numbers.html",
+  "display": "standalone",
+  "display_override": ["window-controls-overlay"], 
+  "prefer_related_applications": false
 }
