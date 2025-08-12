@@ -1,14 +1,12 @@
-// File: scripts.js
-// --- a/file:///c%3A/Users/ap0ca/OneDrive/Documents/Programming/HTML_The_Numbers/scripts.js
-/* * The Numbers Game
- * A simple math game where users can practice addition.
- * This script generates random numbers and displays them for the user to solve.
- */
+// File: scripts_the_numbers.js
+// --- a/file:///c%3A/GitHub/ap0calip.github.io/scripts_the_numbers.js
+// +++ b/file:///c%3A/GitHub/ap0calip.github.io/scripts_the_numbers.js
+// @@ -1,3 +1,4 @@
 
 // Prevent the browser from navigating away without confirmation
-window.addEventListener('beforeunload', function (e) {
-  e.preventDefault();
-});
+// window.addEventListener('beforeunload', function (e) {
+//   e.preventDefault();
+// });
 
 // Add sound effect on button click
 const soundPositive = new Audio('sound/sound_positive.mp3');
@@ -21,7 +19,39 @@ let operator = '+'; // Default operator
 let operatorView = '+'; // Default operator view
 let level = 10;     // Default level (Easy)
 let stickerFolder = 'BoySticker/'; // Folder for sticker images
+let starNumber = 0; // Starting number for the game
+let stickerNumber = 0; // Starting number for the sticker
+let firstNumber = 0; // First number in the equation
+let secondNumber = 0; // Second number in the equation
 
+// Initialize the game with default settings
+window.onload = function() {
+    resetGame();
+};
+
+// Reset the game to default settings
+function resetGame() {
+    getCookie('stickerFolder') ? stickerFolder = getCookie('stickerFolder') : stickerFolder = 'BoySticker/';
+    getCookie('operator') ? operator = getCookie('operator') : operator = '+';  
+    getCookie('starNumber') ? starNumber = parseInt(getCookie('starNumber')) : starNumber = 0;
+    getCookie('stickerNumber') ? stickerNumber = parseInt(getCookie('stickerNumber')) : stickerNumber = 0;
+    getCookie('level') ? level = parseInt(getCookie('level')) : level = 10;
+    updateSelector();
+    updateStar()
+    updateSticker();
+    resetNumbers();
+}
+
+document.addEventListener('keydown', function (event) {
+  // F5 has key code 116
+  if (event.key === 'F5' || event.keyCode === 116) {
+    event.preventDefault(); // Prevent the default refresh behavior
+    console.log('F5 was pressed!');
+    // You can trigger your custom logic here
+  }
+});
+
+// Get keydown events for number input
 document.addEventListener("keydown", function(event) {
   if (isDigit(event.key)) {
     addNumber(event.key);
@@ -43,10 +73,10 @@ document.addEventListener("keydown", function(event) {
     }
 });
 
+// Function to check if the key pressed is a digit
 function isDigit(key) {
   return /^[0-9]$/.test(key); // Accepts only single digits 0–9
 }
-
 
 // Handle operator change from dropdown
 function onOperatorChange() {
@@ -77,6 +107,8 @@ function onLevelChange() {
     resetNumbers();
 }
 
+// Handle gender change from dropdown
+// This will change the sticker folder based on the selected
 function onGenderChange() {
     const gender = document.getElementById('genderSelect').value;
     if (gender === 'boy') {
@@ -87,12 +119,56 @@ function onGenderChange() {
     resetNumbers();
 }
 
-window.onload = function() {
-    resetNumbers();
-};
+function updateSelector() {
+    if (operator === '+') {
+        document.getElementById('operatorSelect').value = '+';
+        operatorView = '+';
+    } else if (operator === '-') {
+        document.getElementById('operatorSelect').value = '-';
+        operatorView = '-';
+    } else if (operator === '*') {
+        document.getElementById('operatorSelect').value = '*';
+        operatorView = '×';
+    } else if (operator === '/') {
+        document.getElementById('operatorSelect').value = '/';
+        operatorView = '÷';
+    }
 
-let firstNumber = 0;
-let secondNumber = 0;
+    if (level === 10) {
+        document.getElementById('levelSelect').value = '1';
+    }  else if (level === 12) {
+        document.getElementById('levelSelect').value = '2';
+    } else {
+        document.getElementById('levelSelect').value = '3';
+    }
+    if (stickerFolder === 'BoySticker/') {
+        document.getElementById('genderSelect').value = 'boy';
+    } else if (stickerFolder === 'GirlSticker/') {
+        document.getElementById('genderSelect').value = 'girl';
+    }
+}
+
+function updateStar() {
+    const starContainer = document.getElementById('starContainer');
+    for( let i = 0; i < starNumber; i++) {
+        let img = document.createElement('img');
+        img.src = 'images/star.png'; // Change to your actual image path
+        img.alt = 'Star';
+        img.className = 'imgStar';
+        starContainer.appendChild(img);
+    }
+}
+
+function updateSticker() {
+    const stickerContainer = document.getElementById('stickerContainer');
+    for (let i = 0; i < stickerNumber; i++) {
+        let img = document.createElement('img');
+        img.src = `${stickerFolder}${i+1}.png`; // Change to your actual image path
+        img.alt = 'Sticker';
+        img.className = 'imgSticker';
+        stickerContainer.appendChild(img);
+    }
+}
 
 function resetNumbers() {
     if (operator === '+') {
@@ -125,6 +201,7 @@ function resetNumbers() {
     document.getElementById('result').innerHTML = '';
 }
 
+// Function to handle image click events
 function imgClick(element) {
     if (element === 'imgFirstNumber') {
         if (firstNumber > 12) {
@@ -174,6 +251,7 @@ function pointerLeave(element) {
     document.getElementById(`${element}`).style.borderColor = 'white';
 }
 
+// Check the result when the user clicks the "Enter" button
 function checkResult() {
     // Pause all sound effects to avoid overlap
     soundPositive.pause();
@@ -213,7 +291,6 @@ function checkResult() {
                 alert(`See your sticker below!`);
             }
         }
-        resetNumbers();
     } else {
         soundNegative.currentTime = 0; // Ensure sound starts from the beginning
         soundNegative.play(); // Play negative sound effect
@@ -221,7 +298,68 @@ function checkResult() {
         alert(`Incorrect! The correct answer is ${correctResult}.`);
         if (imgStar.length > 0) {
             imgStar[imgStar.length - 1].remove(); // Remove the last star if the answer is incorrect
-        }
-        resetNumbers();    
+        }  
     }
+    starNumber = imgStar.length;
+    stickerNumber = imgSticker.length -1; // Adjusted to match the number of stickers
+    updateCookies();
+    resetNumbers();
+}
+
+//****************** Cookie functions ******************
+
+// Function to set a cookie
+function setCookie(name, value, days) {
+    let expires = "";
+    if (days) {
+        const date = new Date();
+        date.setTime(date.getTime() + (days*24*60*60*1000));
+        expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + (value || "")  + expires + "; path=/";
+}
+
+// Function to get a cookie
+function getCookie(name) {
+    try {
+        // Add validation for cookie name
+        if (!name || typeof name !== 'string') {
+            throw new Error('Invalid cookie name');
+        }
+
+        const cookieName = name + "=";
+        const decodedCookie = decodeURIComponent(document.cookie);
+        
+        // Use array method find() instead of for loop
+        const cookieValue = decodedCookie.split(';')
+            .map(c => c.trim())
+            .find(c => c.startsWith(cookieName));
+
+        // Return cookie value or null if not found
+        return cookieValue ? cookieValue.substring(cookieName.length) : null;
+    } catch (error) {
+        console.error('Error getting cookie:', error);
+        return null;
+    }
+}
+
+// Function to update cookies with current settings
+function updateCookies() {
+    setCookie('stickerFolder', stickerFolder, 365);
+    setCookie('operator', operator, 365);
+    setCookie('starNumber', starNumber.toString(), 365);
+    setCookie('stickerNumber', stickerNumber.toString(), 365);
+    setCookie('level', level.toString(), 365);
+}
+
+// Function to delete all cookies
+function resetCookies() {
+    setCookie('stickerFolder', 'BoySticker/', -1);
+    setCookie('operator', '+', -1);
+    setCookie('starNumber', '0', -1);
+    setCookie('stickerNumber', '0', -1);
+    setCookie('level', '10', -1);
+    
+    location.reload(); // Reload the page to apply changes
+    alert('All cookies have been reset to default values!');
 }
