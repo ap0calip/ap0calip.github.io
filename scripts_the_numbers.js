@@ -23,6 +23,7 @@ let starNumber = 0; // Starting number for the game
 let stickerNumber = 0; // Starting number for the sticker
 let firstNumber = 0; // First number in the equation
 let secondNumber = 0; // Second number in the equation
+let cookieDay = 1;
 
 // Initialize the game with default settings
 window.onload = function() {
@@ -345,11 +346,11 @@ function getCookie(name) {
 
 // Function to update cookies with current settings
 function updateCookies() {
-    setCookie('stickerFolder', stickerFolder, 365);
-    setCookie('operator', operator, 365);
-    setCookie('starNumber', starNumber.toString(), 365);
-    setCookie('stickerNumber', stickerNumber.toString(), 365);
-    setCookie('level', level.toString(), 365);
+    setCookie('stickerFolder', stickerFolder, cookieDay);
+    setCookie('operator', operator, cookieDay);
+    setCookie('starNumber', starNumber.toString(), cookieDay);
+    setCookie('stickerNumber', stickerNumber.toString(), cookieDay);
+    setCookie('level', level.toString(), cookieDay);
 }
 
 // Function to delete all cookies
