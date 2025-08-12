@@ -285,7 +285,7 @@ function checkResult() {
                     imgStar[imgStar.length - 1].remove();
                 }
                 let img = document.createElement('img');
-                img.src = `${stickerFolder}${imgSticker.length + 1}.png`; // Change to your actual image path
+                img.src = `${stickerFolder}${imgSticker.length}.png`; // Change to your actual image path
                 img.alt = 'Sticker';
                 img.className = 'imgSticker';
                 stickerContainer.appendChild(img);
