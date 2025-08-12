@@ -26,11 +26,6 @@ let secondNumber = 0; // Second number in the equation
 
 // Initialize the game with default settings
 window.onload = function() {
-    resetGame();
-};
-
-// Reset the game to default settings
-function resetGame() {
     getCookie('stickerFolder') ? stickerFolder = getCookie('stickerFolder') : stickerFolder = 'BoySticker/';
     getCookie('operator') ? operator = getCookie('operator') : operator = '+';  
     getCookie('starNumber') ? starNumber = parseInt(getCookie('starNumber')) : starNumber = 0;
@@ -40,8 +35,10 @@ function resetGame() {
     updateStar()
     updateSticker();
     resetNumbers();
-}
+};
 
+// Prevent F5 key from refreshing the page
+// This is useful for preventing accidental page refreshes during gameplay
 document.addEventListener('keydown', function (event) {
   // F5 has key code 116
   if (event.key === 'F5' || event.keyCode === 116) {
@@ -94,6 +91,7 @@ function onOperatorChange() {
     else if (op === '/') {
         operatorView = '÷';
     }
+    updateCookies();
     resetNumbers();
 }
 
@@ -104,6 +102,7 @@ function onLevelChange() {
     if (lvl === '1') level = 10;
     else if (lvl === '2') level = 12;
     else if (lvl === '3') level = 100;
+    updateCookies();
     resetNumbers();
 }
 
@@ -116,6 +115,7 @@ function onGenderChange() {
     } else if (gender === 'girl') {
         stickerFolder = 'GirlSticker/';
     }
+    updateCookies();
     resetNumbers();
 }
 
@@ -259,11 +259,11 @@ function checkResult() {
     soundSticker.pause();
     
     let result = document.getElementById('result').innerHTML;
-    let correctResult = eval(`${firstNumber} ${operator} ${secondNumber}`);
     const imgStar = document.getElementsByClassName('imgStar');
     const imgSticker = document.getElementsByClassName('imgSticker');
     const starContainer = document.getElementById('starContainer');
     const stickerContainer = document.getElementById('stickerContainer');
+    let correctResult = eval(`${firstNumber} ${operator} ${secondNumber}`);
     if (parseInt(result) === correctResult) {
         if( imgStar.length < maxStars ) {
             soundPositive.currentTime = 0; // Ensure sound starts from the beginning
