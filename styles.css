@@ -1,5 +1,5 @@
 
-* {
+a {
     color: white;
 }
 
@@ -16,7 +16,11 @@ body {
 }
 
 ul {
-    color: white;
+    color: lightgreen;
     font-size: 4vw;
     list-style-position: inside;
+}
+
+li {
+    color:lightgreen;
 }
