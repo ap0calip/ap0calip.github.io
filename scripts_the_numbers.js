@@ -27,15 +27,12 @@ let cookieDay = 1;
 
 // Initialize the game with default settings
 window.onload = function() {
-    getCookie('stickerFolder') ? stickerFolder = getCookie('stickerFolder') : stickerFolder = 'BoySticker/';
-    getCookie('operator') ? operator = getCookie('operator') : operator = '+';  
-    getCookie('starNumber') ? starNumber = parseInt(getCookie('starNumber')) : starNumber = 0;
-    getCookie('stickerNumber') ? stickerNumber = parseInt(getCookie('stickerNumber')) : stickerNumber = 0;
-    getCookie('level') ? level = parseInt(getCookie('level')) : level = 10;
+    getAllCookies();
     updateSelector();
     updateStar()
     updateSticker();
     resetNumbers();
+    orientationSetup();
 };
 
 // Prevent F5 key from refreshing the page
@@ -320,6 +317,24 @@ function setCookie(name, value, days) {
     document.cookie = name + "=" + (value || "")  + expires + "; path=/";
 }
 
+// Function to update cookies with current settings
+function updateCookies() {
+    setCookie('stickerFolder', stickerFolder, cookieDay);
+    setCookie('operator', operator, cookieDay);
+    setCookie('starNumber', starNumber.toString(), cookieDay);
+    setCookie('stickerNumber', stickerNumber.toString(), cookieDay);
+    setCookie('level', level.toString(), cookieDay);
+}
+
+// Function to get all cookies and set default values if not present
+function getAllCookies() {
+    getCookie('stickerFolder') ? stickerFolder = getCookie('stickerFolder') : stickerFolder = 'BoySticker/';
+    getCookie('operator') ? operator = getCookie('operator') : operator = '+';  
+    getCookie('starNumber') ? starNumber = parseInt(getCookie('starNumber')) : starNumber = 0;
+    getCookie('stickerNumber') ? stickerNumber = parseInt(getCookie('stickerNumber')) : stickerNumber = 0;
+    getCookie('level') ? level = parseInt(getCookie('level')) : level = 10;
+}
+
 // Function to get a cookie
 function getCookie(name) {
     try {
@@ -344,15 +359,6 @@ function getCookie(name) {
     }
 }
 
-// Function to update cookies with current settings
-function updateCookies() {
-    setCookie('stickerFolder', stickerFolder, cookieDay);
-    setCookie('operator', operator, cookieDay);
-    setCookie('starNumber', starNumber.toString(), cookieDay);
-    setCookie('stickerNumber', stickerNumber.toString(), cookieDay);
-    setCookie('level', level.toString(), cookieDay);
-}
-
 // Function to delete all cookies
 function resetCookies() {
     setCookie('stickerFolder', 'BoySticker/', -1);
@@ -364,3 +370,14 @@ function resetCookies() {
     location.reload(); // Reload the page to apply changes
     alert('All cookies have been reset to default values!');
 }
+
+// Function to get the current orientation of the device
+function orientationSetup() {
+  if (window.innerHeight > window.innerWidth) {
+    alert('Portrait');
+  } else {
+    alert('Landscape');
+  }
+}
+
+window.addEventListener("resize", orientationSetup);

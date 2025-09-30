@@ -10,9 +10,8 @@
             "request": "launch",
             "name": "Launch Chrome against localhost",
             // "url": "http://localhost:8080",
-            //"url": "C:\\Users\\ap0ca\\OneDrive\\Documents\\GitHub\\ap0calip.github.io\\index.html",
-            //"url": "C:\\GitHub\\ap0calip.github.io\\the_numbers.html",
-             "url": "C:\\Users\\977740\\OneDrive - Fresenius\\Dokumente\\GitHub\\ap0calip.github.io\\index.html",
+            "url": "C:\\GitHub\\ap0calip.github.io\\the_numbers.html",
+            // "url": "C:\\Users\\977740\\OneDrive - Fresenius\\Dokumente\\GitHub\\ap0calip.github.io\\index.html",
             "webRoot": "${workspaceFolder}"
         }
     ]
