@@ -26,11 +26,6 @@ img {
   height: 15vw;
 }
 
-.imgBorder {
-  width: 7vw;
-  height: auto;
-}
-
 .imgStar {
   width: 10vw;
   height: auto;
@@ -48,10 +43,9 @@ img {
   padding: 0.5vw;
 }
 
-.numbers-container {
-  display: grid;
-  grid-template-columns: auto auto auto auto auto auto auto auto auto auto;
-  padding: 0.5vw;
+.numbers-container, .additional-container {
+    display: grid;
+    padding: 0.5vw;
 }
 
 .numbers-container > div {
@@ -73,8 +67,6 @@ img {
 }
 
 .additional-container {
-  display: grid;
-  grid-template-columns: auto auto auto auto auto auto;
   grid-template-rows: 8vw 18vw;
   padding: 4vwx;
 }

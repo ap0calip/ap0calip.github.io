@@ -32,7 +32,7 @@ window.onload = function() {
     updateStar()
     updateSticker();
     resetNumbers();
-    orientationSetup();
+    updateTemplate();
 };
 
 // Prevent F5 key from refreshing the page
@@ -372,12 +372,27 @@ function resetCookies() {
 }
 
 // Function to get the current orientation of the device
-function orientationSetup() {
+function updateTemplate() {
+    const container = document.querySelector('.numbers-container');
+    const additionalContainer = document.querySelector('.additional-container');
+    const imageBorderLeft = document.querySelector('.imgBorderLeft');
+    const imageBorderRight = document.querySelector('.imgBorderRight');
+
   if (window.innerHeight > window.innerWidth) {
-    alert('Portrait');
+    //alert('Portrait');
+    container.style.gridTemplateColumns = 'auto auto auto auto auto';
+    imageBorderLeft.style.width = '0vw';
+    imageBorderRight.style.width = '0vw';
   } else {
-    alert('Landscape');
+    //alert('Landscape');
+    container.style.gridTemplateColumns = 'auto auto auto auto auto auto auto auto auto auto';
+    imageBorderLeft.style.width = '7vw';
+    imageBorderRight.style.width = '7vw';
   }
+  additionalContainer.style.gridTemplateColumns = 'auto auto auto auto auto auto';
+  additionalContainer.style.gridTemplateRows = '8vw 18vw';
+  imageBorderLeft.style.height = 'auto';
+  imageBorderRight.style.height = 'auto';
 }
 
-window.addEventListener("resize", orientationSetup);
+window.addEventListener("resize", updateTemplate);
