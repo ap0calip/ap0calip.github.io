@@ -1,0 +1,75 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Numbers</title>
+
+    <!-- Load external CSS styles -->
+    <link rel="stylesheet" href="styles.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/png" sizes="192x192" href="images/192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="images/512x512.png">
+</head>
+
+<body>
+    <div>
+        <h1>The Numbers</h1>
+    </div>
+
+    <div id="instructionText" class="instruction-text">
+        <p>Welcome to The Numbers! This is a fun and educational math game designed for kids to practice their
+            arithmetic skills. Choose an operator and level to start playing!</p>
+        <p>Instructions:</p>
+        <ul>
+            <li>Select an operator (+, -, ×, ÷) from the dropdown menu.</li>
+            <li>Choose a difficulty level (Easy 10, Medium 12, Hard 100).</li>
+        </ul>
+    </div>
+    <!-- Operator and Level Selection Menu -->
+    <div class="menu-bar">
+        <div>
+            <label for="operatorSelect">Operator:</label>
+            <select id="operatorSelect" onchange="onOperatorChange()">
+                <option value="+">+</option>
+                <option value="-">-</option>
+                <option value="*">×</option>
+                <option value="/">÷</option>
+            </select>
+        </div>
+        <div>
+            <label for="levelSelect">Level:</label>
+            <select id="levelSelect" onchange="onLevelChange()">
+                <option value="1">Easy 10</option>
+                <option value="2">Medium 12</option>
+                <option value="3">Hard 100</option>
+            </select>
+        </div>
+        <div>
+            <label for="genderSelect">Gender:</label>
+            <select id="genderSelect" onchange="onGenderChange()">
+                <option value="boy">Boy</option>
+                <option value="girl">Girl</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>© 2019 <img src="images/logo2_con_borde.png" alt="Logo" class="imgSticker"></p>
+        <p style="font-size: 3vw;" onclick="resetCookies()">Image by William Liu from ArtStation. Sound by floraphonic
+            from Pixabay. Click here to reset cookies.</p>
+        <a href="./game.html">The Numbers (Webpage)</a>
+    </div>
+
+    <!-- Load external JavaScript -->
+    <script src="scripts.js"></script>
+    <script src="instruction.js"></script>
+    <script>
+        if (typeof navigator.serviceWorker !== 'undefined') {
+            navigator.serviceWorker.register('service-worker.js')
+        }
+    </script>
+</body>
+
+</html>

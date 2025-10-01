@@ -1,150 +1,12 @@
-// File: scripts_the_numbers.js
-// --- a/file:///c%3A/GitHub/ap0calip.github.io/scripts_the_numbers.js
-// +++ b/file:///c%3A/GitHub/ap0calip.github.io/scripts_the_numbers.js
-// @@ -1,3 +1,4 @@
-
-// Prevent the browser from navigating away without confirmation
-// window.addEventListener('beforeunload', function (e) {
-//   e.preventDefault();
-// });
-
-// Add sound effect on button click
-const soundPositive = new Audio('sound/sound_positive.mp3');
-const soundNegative = new Audio('sound/sound_negative.mp3');
-const soundSticker = new Audio('sound/sound_sticker.mp3');
-
-const maxStars = 8; // Maximum number of stars allowed, default is 8
-const maxSticker = 20; // Maximum number of gifts allowed, default is 20
-let operator = '+'; // Default operator
-let operatorView = '+'; // Default operator view
-let level = 10;     // Default level (Easy)
-let stickerFolder = 'BoySticker/'; // Folder for sticker images
-let starNumber = 0; // Starting number for the game
-let stickerNumber = 0; // Starting number for the sticker
-let firstNumber = 0; // First number in the equation
-let secondNumber = 0; // Second number in the equation
-let cookieDay = 1;
-
 // Initialize the game with default settings
 window.onload = function() {
     getAllCookies();
-    updateSelector();
     updateStar()
     updateSticker();
     resetNumbers();
     updateTemplate();
+    alert(`Windows Onload event triggered ${operator} ${level} ${stickerFolder} ${starNumber} ${stickerNumber}`);
 };
-
-// Prevent F5 key from refreshing the page
-// This is useful for preventing accidental page refreshes during gameplay
-document.addEventListener('keydown', function (event) {
-  // F5 has key code 116
-  if (event.key === 'F5' || event.keyCode === 116) {
-    event.preventDefault(); // Prevent the default refresh behavior
-    console.log('F5 was pressed!');
-    // You can trigger your custom logic here
-  }
-});
-
-// Get keydown events for number input
-document.addEventListener("keydown", function(event) {
-  if (isDigit(event.key)) {
-    addNumber(event.key);
-  }
-    else if (event.key === 'Enter') {
-        checkResult();
-    }
-    else if (event.key === 'Escape') {
-        clearResult();
-    }
-    else if (event.key === 'Backspace' || event.key === 'Delete') {
-        let result = document.getElementById('result').innerHTML;
-        result = result.slice(0, -1); // Remove the last character
-        document.getElementById('result').innerHTML = result;
-    }
-    else if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
-        // Prevent default behavior of arrow keys
-        event.preventDefault();
-    }
-});
-
-// Function to check if the key pressed is a digit
-function isDigit(key) {
-  return /^[0-9]$/.test(key); // Accepts only single digits 0–9
-}
-
-// Handle operator change from dropdown
-function onOperatorChange() {
-    const op = document.getElementById('operatorSelect').value;
-    operator = op;
-    if (op === '+') {
-        operatorView = '+';
-    }
-    else if (op === '-') {
-        operatorView = '-';
-    }
-    else if (op === '*') {
-        operatorView = '×';
-    }
-    else if (op === '/') {
-        operatorView = '÷';
-    }
-    updateCookies();
-    resetNumbers();
-}
-
-// Handle level change from dropdown
-function onLevelChange() {
-    const lvl = document.getElementById('levelSelect').value;
-    // Level 1: 0-10, Level 2: 0-12, Level 3: 0-100
-    if (lvl === '1') level = 10;
-    else if (lvl === '2') level = 12;
-    else if (lvl === '3') level = 100;
-    updateCookies();
-    resetNumbers();
-}
-
-// Handle gender change from dropdown
-// This will change the sticker folder based on the selected
-function onGenderChange() {
-    const gender = document.getElementById('genderSelect').value;
-    if (gender === 'boy') {
-        stickerFolder = 'BoySticker/';
-    } else if (gender === 'girl') {
-        stickerFolder = 'GirlSticker/';
-    }
-    updateCookies();
-    resetNumbers();
-}
-
-function updateSelector() {
-    if (operator === '+') {
-        document.getElementById('operatorSelect').value = '+';
-        operatorView = '+';
-    } else if (operator === '-') {
-        document.getElementById('operatorSelect').value = '-';
-        operatorView = '-';
-    } else if (operator === '*') {
-        document.getElementById('operatorSelect').value = '*';
-        operatorView = '×';
-    } else if (operator === '/') {
-        document.getElementById('operatorSelect').value = '/';
-        operatorView = '÷';
-    }
-
-    if (level === 10) {
-        document.getElementById('levelSelect').value = '1';
-    }  else if (level === 12) {
-        document.getElementById('levelSelect').value = '2';
-    } else {
-        document.getElementById('levelSelect').value = '3';
-    }
-    if (stickerFolder === 'BoySticker/') {
-        document.getElementById('genderSelect').value = 'boy';
-    } else if (stickerFolder === 'GirlSticker/') {
-        document.getElementById('genderSelect').value = 'girl';
-    }
-}
 
 function updateStar() {
     const starContainer = document.getElementById('starContainer');
@@ -304,71 +166,31 @@ function checkResult() {
     resetNumbers();
 }
 
-//****************** Cookie functions ******************
-
-// Function to set a cookie
-function setCookie(name, value, days) {
-    let expires = "";
-    if (days) {
-        const date = new Date();
-        date.setTime(date.getTime() + (days*24*60*60*1000));
-        expires = "; expires=" + date.toUTCString();
+// Get keydown events for number input
+document.addEventListener("keydown", function(event) {
+  if (isDigit(event.key)) {
+    addNumber(event.key);
+  }
+    else if (event.key === 'Enter') {
+        checkResult();
     }
-    document.cookie = name + "=" + (value || "")  + expires + "; path=/";
-}
-
-// Function to update cookies with current settings
-function updateCookies() {
-    setCookie('stickerFolder', stickerFolder, cookieDay);
-    setCookie('operator', operator, cookieDay);
-    setCookie('starNumber', starNumber.toString(), cookieDay);
-    setCookie('stickerNumber', stickerNumber.toString(), cookieDay);
-    setCookie('level', level.toString(), cookieDay);
-}
-
-// Function to get all cookies and set default values if not present
-function getAllCookies() {
-    getCookie('stickerFolder') ? stickerFolder = getCookie('stickerFolder') : stickerFolder = 'BoySticker/';
-    getCookie('operator') ? operator = getCookie('operator') : operator = '+';  
-    getCookie('starNumber') ? starNumber = parseInt(getCookie('starNumber')) : starNumber = 0;
-    getCookie('stickerNumber') ? stickerNumber = parseInt(getCookie('stickerNumber')) : stickerNumber = 0;
-    getCookie('level') ? level = parseInt(getCookie('level')) : level = 10;
-}
-
-// Function to get a cookie
-function getCookie(name) {
-    try {
-        // Add validation for cookie name
-        if (!name || typeof name !== 'string') {
-            throw new Error('Invalid cookie name');
-        }
-
-        const cookieName = name + "=";
-        const decodedCookie = decodeURIComponent(document.cookie);
-        
-        // Use array method find() instead of for loop
-        const cookieValue = decodedCookie.split(';')
-            .map(c => c.trim())
-            .find(c => c.startsWith(cookieName));
-
-        // Return cookie value or null if not found
-        return cookieValue ? cookieValue.substring(cookieName.length) : null;
-    } catch (error) {
-        console.error('Error getting cookie:', error);
-        return null;
+    else if (event.key === 'Escape') {
+        clearResult();
     }
-}
+    else if (event.key === 'Backspace' || event.key === 'Delete') {
+        let result = document.getElementById('result').innerHTML;
+        result = result.slice(0, -1); // Remove the last character
+        document.getElementById('result').innerHTML = result;
+    }
+    else if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+        // Prevent default behavior of arrow keys
+        event.preventDefault();
+    }
+});
 
-// Function to delete all cookies
-function resetCookies() {
-    setCookie('stickerFolder', 'BoySticker/', -1);
-    setCookie('operator', '+', -1);
-    setCookie('starNumber', '0', -1);
-    setCookie('stickerNumber', '0', -1);
-    setCookie('level', '10', -1);
-    
-    location.reload(); // Reload the page to apply changes
-    alert('All cookies have been reset to default values!');
+// Function to check if the key pressed is a digit
+function isDigit(key) {
+  return /^[0-9]$/.test(key); // Accepts only single digits 0–9
 }
 
 // Function to get the current orientation of the device
@@ -390,9 +212,7 @@ function updateTemplate() {
     imageBorderRight.style.width = '7vw';
   }
   additionalContainer.style.gridTemplateColumns = 'auto auto auto auto auto auto';
-  additionalContainer.style.gridTemplateRows = '10vw 18vw';
+  additionalContainer.style.gridTemplateRows = '8vw 18vw';
   imageBorderLeft.style.height = 'auto';
   imageBorderRight.style.height = 'auto';
 }
-
-window.addEventListener("resize", updateTemplate);

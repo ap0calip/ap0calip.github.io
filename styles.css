@@ -1,26 +1,84 @@
+/* Place your CSS styles in this file */
 
-a {
-    color: white;
+* {
+  margin: 0;
+  box-sizing: border-box;
+  text-align: center;
+  font-size: 10vw;
 }
 
-body {
-    background-color: black;
+label, select, .menu-bar, option, h1 {
+  display: inline-flex;
+  justify-content: center;
+  align-items: end;
+  gap: 1vw;
+  font-family: "Monotype Corsiva", cursive;
+  font-weight: bold;
+  /* font-size: 2vw; */
 }
 
-.logo {
-    width: 50%;
-    height: auto;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+h1 {
+  font-size: 6vw;
 }
 
-ul {
-    color: lightgreen;
-    font-size: 4vw;
-    list-style-position: inside;
+img {
+  width: 10vw;
+  height: 15vw;
 }
 
-li {
-    color:lightgreen;
+.imgStar {
+  width: 10vw;
+  height: auto;
+}
+
+.imgSticker {
+  width: 20vw;
+  height: auto;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: min-content auto min-content;
+  background-color: rgb(235, 145, 10);
+  padding: 0.5vw;
+}
+
+.numbers-container, .additional-container {
+    display: grid;
+    padding: 0.5vw;
+}
+
+.numbers-container > div {
+  background-color: yellow;
+  border: 0.2vw solid white;
+  margin: 0.5vw;
+}
+
+.enter {
+  background-color: green;
+  border: 0.2vw solid white;
+  margin: 0.5vw;
+}
+
+.clear {
+  background-color: yellow;
+  border: 0.2vw solid white;
+  margin: 0.5vw;
+}
+
+.additional-container {
+  grid-template-rows: 8vw 18vw;
+  padding: 4vwx;
+}
+
+.numbers {
+  background-color: rgb(36, 196, 218);
+  border: none;
+  margin: 0.5vw;
+}
+
+.imgNumbers {
+  background-color: rgb(36, 196, 218);
+  border: 0.2vw solid white;
+  margin: 0.5vw;
 }
