@@ -1,26 +1,14 @@
 // Initialize the game with default settings
-window.onload = function() {
+window.onload = function () {
     getAllCookies();
     updateSelector();
-    alert(`Windows Onload event triggered ${operator} ${level} ${stickerFolder} ${starNumber} ${stickerNumber}`);
+    alert(`inst: ${operator} ${level} ${stickerFolder} ${starNumber} ${stickerNumber} ${saved} ${operatorView}`);
 };
 
 // Handle operator change from dropdown
 function onOperatorChange() {
     const op = document.getElementById('operatorSelect').value;
     operator = op;
-    if (op === '+') {
-        operatorView = '+';
-    }
-    else if (op === '-') {
-        operatorView = '-';
-    }
-    else if (op === '*') {
-        operatorView = '×';
-    }
-    else if (op === '/') {
-        operatorView = '÷';
-    }
 }
 
 // Handle level change from dropdown
@@ -36,38 +24,24 @@ function onLevelChange() {
 // This will change the sticker folder based on the selected
 function onGenderChange() {
     const gender = document.getElementById('genderSelect').value;
-    if (gender === 'boy') {
-        stickerFolder = 'BoySticker/';
-    } else if (gender === 'girl') {
-        stickerFolder = 'GirlSticker/';
-    }
+    if (gender === 'boy') stickerFolder = 'BoySticker/';
+    else if (gender === 'girl') stickerFolder = 'GirlSticker/';
 }
 
+// Update the dropdown selectors to reflect current settings
 function updateSelector() {
-    if (operator === '+') {
-        document.getElementById('operatorSelect').value = '+';
-        operatorView = '+';
-    } else if (operator === '-') {
-        document.getElementById('operatorSelect').value = '-';
-        operatorView = '-';
-    } else if (operator === '*') {
-        document.getElementById('operatorSelect').value = '*';
-        operatorView = '×';
-    } else if (operator === '/') {
-        document.getElementById('operatorSelect').value = '/';
-        operatorView = '÷';
-    }
+    // Set operator selector
+    if (operator === '+') document.getElementById('operatorSelect').value = '+';
+    else if (operator === '-') document.getElementById('operatorSelect').value = '-';
+    else if (operator === '*') document.getElementById('operatorSelect').value = '*';
+    else if (operator === '/') document.getElementById('operatorSelect').value = '/';
 
-    if (level === 10) {
-        document.getElementById('levelSelect').value = '1';
-    }  else if (level === 12) {
-        document.getElementById('levelSelect').value = '2';
-    } else {
-        document.getElementById('levelSelect').value = '3';
-    }
-    if (stickerFolder === 'BoySticker/') {
-        document.getElementById('genderSelect').value = 'boy';
-    } else if (stickerFolder === 'GirlSticker/') {
-        document.getElementById('genderSelect').value = 'girl';
-    }
+    // Set level selector
+    if (level === 10) document.getElementById('levelSelect').value = '1';
+    else if (level === 12) document.getElementById('levelSelect').value = '2';
+    else if (level === 100) document.getElementById('levelSelect').value = '3';
+
+    // Set Gender selector
+    if (stickerFolder === 'BoySticker/') document.getElementById('genderSelect').value = 'boy';
+    else if (stickerFolder === 'GirlSticker/') document.getElementById('genderSelect').value = 'girl';
 }

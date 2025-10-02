@@ -7,45 +7,13 @@
     <title>The Numbers</title>
 
     <!-- Load external CSS styles -->
-    <link rel="stylesheet" href="styles_the_numbers.css">
+    <link rel="stylesheet" href="styles.css">
     <link rel="manifest" href="manifest.json">
     <link rel="icon" type="image/png" sizes="192x192" href="images/192x192.png">
     <link rel="icon" type="image/png" sizes="512x512" href="images/512x512.png">
 </head>
 
 <body>
-
-
-
-    <!-- Operator and Level Selection Menu -->
-    <div class="menu-bar">
-        <h1>The Numbers</h1>
-        <div>
-            <label for="operatorSelect">Operator:</label>
-            <select id="operatorSelect" onchange="onOperatorChange()">
-                <option value="+">+</option>
-                <option value="-">-</option>
-                <option value="*">×</option>
-                <option value="/">÷</option>
-            </select>
-        </div>
-        <div>
-            <label for="levelSelect">Level:</label>
-            <select id="levelSelect" onchange="onLevelChange()">
-                <option value="1">Easy 10</option>
-                <option value="2">Medium 12</option>
-                <option value="3">Hard 100</option>
-            </select>
-        </div>
-        <div>
-            <label for="genderSelect">Gender:</label>
-            <select id="genderSelect" onchange="onGenderChange()">
-                <option value="boy">Boy</option>
-                <option value="girl">Girl</option>
-            </select>
-        </div>
-    </div>
-
     <div class="container">
         <div class="image-container">
             <img src="images/left.jpg" alt="Left Image" class="imgBorderLeft">
@@ -128,12 +96,13 @@
 
     <div class="footer">
         <p>© 2019 <img src="images/logo2_con_borde.png" alt="Logo" class="imgSticker"></p>
-        <p style="font-size: 3vw;" onclick="resetCookies()">Image by William Liu from ArtStation. Sound by floraphonic
-            from Pixabay. Click here to reset cookies.</p>
+        <!-- <button onclick="resetCookies()">Click here to reset.</button> -->
+         <button onclick="window.location.href='./instruction.html'">Click here to reset.</button>
     </div>
 
     <!-- Load external JavaScript -->
-    <script src="scripts_the_numbers.js"></script>
+    <script src="scripts.js"></script>
+    <script src="the_numbers.js"></script>
     <script>
         if (typeof navigator.serviceWorker !== 'undefined') {
             navigator.serviceWorker.register('service-worker.js')

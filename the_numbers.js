@@ -1,16 +1,23 @@
+window.addEventListener("resize", updateTemplate);
+
 // Initialize the game with default settings
-window.onload = function() {
-    getAllCookies();
-    updateStar()
-    updateSticker();
-    resetNumbers();
+window.onload = function () {
     updateTemplate();
-    alert(`Windows Onload event triggered ${operator} ${level} ${stickerFolder} ${starNumber} ${stickerNumber}`);
+    getAllCookies();
+    if (saved === 'no') {
+        window.location.href = './instruction.html';
+    } 
+    else {
+        updateStar();
+        updateSticker();
+        resetNumbers();
+    }
+    alert(`numbers: ${operator} ${level} ${stickerFolder} ${starNumber} ${stickerNumber} ${saved} ${operatorView}`);
 };
 
 function updateStar() {
     const starContainer = document.getElementById('starContainer');
-    for( let i = 0; i < starNumber; i++) {
+    for (let i = 0; i < starNumber; i++) {
         let img = document.createElement('img');
         img.src = 'images/star.png'; // Change to your actual image path
         img.alt = 'Star';
@@ -23,7 +30,7 @@ function updateSticker() {
     const stickerContainer = document.getElementById('stickerContainer');
     for (let i = 0; i < stickerNumber; i++) {
         let img = document.createElement('img');
-        img.src = `${stickerFolder}${i+1}.png`; // Change to your actual image path
+        img.src = `${stickerFolder}${i + 1}.png`; // Change to your actual image path
         img.alt = 'Sticker';
         img.className = 'imgSticker';
         stickerContainer.appendChild(img);
@@ -92,7 +99,7 @@ function imgLeave(element) {
     document.getElementById(element).src = `images/block.png`;
 }
 
-function addNumber(element){
+function addNumber(element) {
     let number = element;
     let result = document.getElementById('result').innerHTML;
     result += number;
@@ -104,7 +111,7 @@ function clearResult() {
 }
 
 function pointerOver(element) {
-    document.getElementById(`${element}`).style.borderColor= 'black';
+    document.getElementById(`${element}`).style.borderColor = 'black';
 }
 
 function pointerLeave(element) {
@@ -117,7 +124,7 @@ function checkResult() {
     soundPositive.pause();
     soundNegative.pause();
     soundSticker.pause();
-    
+
     let result = document.getElementById('result').innerHTML;
     const imgStar = document.getElementsByClassName('imgStar');
     const imgSticker = document.getElementsByClassName('imgSticker');
@@ -125,7 +132,7 @@ function checkResult() {
     const stickerContainer = document.getElementById('stickerContainer');
     let correctResult = eval(`${firstNumber} ${operator} ${secondNumber}`);
     if (parseInt(result) === correctResult) {
-        if( imgStar.length < maxStars ) {
+        if (imgStar.length < maxStars) {
             soundPositive.currentTime = 0; // Ensure sound starts from the beginning
             soundPositive.play(); // Play positive sound effect
             let img = document.createElement('img');
@@ -158,19 +165,19 @@ function checkResult() {
         alert(`Incorrect! The correct answer is ${correctResult}.`);
         if (imgStar.length > 0) {
             imgStar[imgStar.length - 1].remove(); // Remove the last star if the answer is incorrect
-        }  
+        }
     }
     starNumber = imgStar.length;
-    stickerNumber = imgSticker.length -1; // Adjusted to match the number of stickers
+    stickerNumber = imgSticker.length - 1; // Adjusted to match the number of stickers
     updateCookies();
     resetNumbers();
 }
 
 // Get keydown events for number input
-document.addEventListener("keydown", function(event) {
-  if (isDigit(event.key)) {
-    addNumber(event.key);
-  }
+document.addEventListener("keydown", function (event) {
+    if (isDigit(event.key)) {
+        addNumber(event.key);
+    }
     else if (event.key === 'Enter') {
         checkResult();
     }
@@ -190,7 +197,7 @@ document.addEventListener("keydown", function(event) {
 
 // Function to check if the key pressed is a digit
 function isDigit(key) {
-  return /^[0-9]$/.test(key); // Accepts only single digits 0–9
+    return /^[0-9]$/.test(key); // Accepts only single digits 0–9
 }
 
 // Function to get the current orientation of the device
@@ -200,19 +207,19 @@ function updateTemplate() {
     const imageBorderLeft = document.querySelector('.imgBorderLeft');
     const imageBorderRight = document.querySelector('.imgBorderRight');
 
-  if (window.innerHeight > window.innerWidth) {
-    //alert('Portrait');
-    container.style.gridTemplateColumns = 'auto auto auto auto auto';
-    imageBorderLeft.style.width = '0vw';
-    imageBorderRight.style.width = '0vw';
-  } else {
-    //alert('Landscape');
-    container.style.gridTemplateColumns = 'auto auto auto auto auto auto auto auto auto auto';
-    imageBorderLeft.style.width = '7vw';
-    imageBorderRight.style.width = '7vw';
-  }
-  additionalContainer.style.gridTemplateColumns = 'auto auto auto auto auto auto';
-  additionalContainer.style.gridTemplateRows = '8vw 18vw';
-  imageBorderLeft.style.height = 'auto';
-  imageBorderRight.style.height = 'auto';
+    if (window.innerHeight > window.innerWidth) {
+        //alert('Portrait');
+        container.style.gridTemplateColumns = 'auto auto auto auto auto';
+        imageBorderLeft.style.width = '0vw';
+        imageBorderRight.style.width = '0vw';
+    } else {
+        //alert('Landscape');
+        container.style.gridTemplateColumns = 'auto auto auto auto auto auto auto auto auto auto';
+        imageBorderLeft.style.width = '7vw';
+        imageBorderRight.style.width = '7vw';
+    }
+    additionalContainer.style.gridTemplateColumns = 'auto auto auto auto auto auto';
+    additionalContainer.style.gridTemplateRows = '9vw 17vw';
+    imageBorderLeft.style.height = 'auto';
+    imageBorderRight.style.height = 'auto';
 }

@@ -1,24 +1,33 @@
-/* Place your CSS styles in this file */
+/* style used by instruction.html and game.html */
 
 * {
   margin: 0;
-  box-sizing: border-box;
   text-align: center;
-  font-size: 10vw;
-}
-
-label, select, .menu-bar, option, h1 {
-  display: inline-flex;
-  justify-content: center;
-  align-items: end;
-  gap: 1vw;
-  font-family: "Monotype Corsiva", cursive;
+  font-size: 8vw;
   font-weight: bold;
-  /* font-size: 2vw; */
 }
 
 h1 {
-  font-size: 6vw;
+  font-size: 12vw;
+  font-weight: bold;
+  font-family: "Monotype Corsiva", cursive;
+  text-shadow: 1vw 1vw .1vw #72dc56;
+}
+
+.instruction-text{
+  font-size: 5vw;
+  margin: 2vw;
+  text-align: justify;
+}
+
+.footer {
+  font-size: 5vw;
+  margin: 2vw;
+  text-align: center;
+}
+
+label, select, option {
+  margin: 2vw;
 }
 
 img {

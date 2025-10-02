@@ -18,17 +18,25 @@
         <h1>The Numbers</h1>
     </div>
 
-    <div id="instructionText" class="instruction-text">
-        <p>Welcome to The Numbers! This is a fun and educational math game designed for kids to practice their
-            arithmetic skills. Choose an operator and level to start playing!</p>
-        <p>Instructions:</p>
+    <div>
+        <p class="instruction-text">Welcome to The Numbers! This is a fun and educational math game designed for kids to
+            practice their
+            arithmetic skills.</p>
+        <p class="instruction-text">Instructions:</p>
         <ul>
-            <li>Select an operator (+, -, ×, ÷) from the dropdown menu.</li>
-            <li>Choose a difficulty level (Easy 10, Medium 12, Hard 100).</li>
+            <li class="instruction-text">Select an operator (+, -, ×, ÷).</li>
+            <li class="instruction-text">Select a difficulty level (Easy 10, Medium 12, Hard 100).</li>
+            <li class="instruction-text">Select a gender (Boy, Girl).</li>
         </ul>
     </div>
+
+    <br>
+
     <!-- Operator and Level Selection Menu -->
-    <div class="menu-bar">
+    <div>
+        <div>
+            Settings:
+        </div>
         <div>
             <label for="operatorSelect">Operator:</label>
             <select id="operatorSelect" onchange="onOperatorChange()">
@@ -53,13 +61,16 @@
                 <option value="girl">Girl</option>
             </select>
         </div>
+        <div>
+            <button onclick="startGame()">Start Game</button>
+        </div>
     </div>
 
-    <div class="footer">
-        <p>© 2019 <img src="images/logo2_con_borde.png" alt="Logo" class="imgSticker"></p>
-        <p style="font-size: 3vw;" onclick="resetCookies()">Image by William Liu from ArtStation. Sound by floraphonic
-            from Pixabay. Click here to reset cookies.</p>
-        <a href="./game.html">The Numbers (Webpage)</a>
+    <br>
+
+    <div>
+        <p class="footer">© 2019 <img src="images/logo2_con_borde.png" alt="Logo" class="imgSticker"></p>
+        <p class="footer">Image by William Liu from ArtStation. Sound by floraphonic from Pixabay.</p>
     </div>
 
     <!-- Load external JavaScript -->
