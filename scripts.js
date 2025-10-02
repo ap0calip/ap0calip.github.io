@@ -8,25 +8,54 @@
 //   e.preventDefault();
 // });
 
-// Add sound effect on button click
-const soundPositive = new Audio('sound/sound_positive.mp3');
-const soundNegative = new Audio('sound/sound_negative.mp3');
-const soundSticker = new Audio('sound/sound_sticker.mp3');
+// Global constants
+window.maxStars = 8;      // Maximum number of stars allowed
+window.maxSticker = 20;   // Maximum number of gifts allowed
+window.cookieDay = 7;     // Number of days before cookies expire
 
-const maxStars = 8; // Maximum number of stars allowed, default is 8
-const maxSticker = 20; // Maximum number of gifts allowed, default is 20
-let operator = '+'; // Default operator
-let operatorView = '+'; // Default operator view
-let level = 10;     // Default level (Easy)
-let stickerFolder = 'BoySticker/'; // Folder for sticker images
-let starNumber = 0; // Starting number for the game
-let stickerNumber = 0; // Starting number for the sticker
-let firstNumber = 0; // First number in the equation
-let secondNumber = 0; // Second number in the equation
-let cookieDay = 7; // Number of days before cookies expire
-let saved = 'no'; // Flag to indicate if settings have been saved
+// Global variables
+window.operator = '+';        // Default operator
+window.operatorView = '+';    // Default operator view
+window.level = 10;           // Default level (Easy)
+window.stickerFolder = 'BoySticker/'; // Folder for sticker images
+window.starNumber = 0;       // Starting number for the game
+window.stickerNumber = 0;    // Starting number for the sticker
+window.firstNumber = 0;      // First number in the equation
+window.secondNumber = 0;     // Second number in the equation
+window.saved = 'no';         // Flag to indicate if settings have been saved
 
+// Sound effects
+window.soundPositive = new Audio('sound/sound_positive.mp3');
+window.soundNegative = new Audio('sound/sound_negative.mp3');
+window.soundSticker = new Audio('sound/sound_sticker.mp3');
 
+// Function to determine current page
+window.getCurrentPage = function () {
+    const path = window.location.pathname;
+    return path.split('/').pop(); // Gets the file name from path
+}
+
+// Initialize the game with default settings
+window.onload = function () {
+    const currentPage = window.getCurrentPage();
+    window.getAllCookies();
+
+    if (currentPage === 'instruction.html') {
+        window.updateSelector();
+        alert('instruction');
+    }
+    else if (currentPage === 'the_numbers.html') {
+        window.updateTemplate();
+        if (window.saved === 'no') {
+            window.location.href = './instruction.html';
+        } else {
+            window.updateStar();
+            window.updateSticker();
+            window.resetNumbers();
+        }
+        alert('the_numbers');
+    }
+};
 
 // Prevent F5 key from refreshing the page
 // This is useful for preventing accidental page refreshes during gameplay
@@ -39,35 +68,36 @@ document.addEventListener('keydown', function (event) {
     }
 });
 
-function startGame() {
+window.startGame = function () {
     // reset star and sticker cookies
-    starNumber = 0;
-    stickerNumber = 0;
-    saved = 'yes';
+    window.starNumber = 0;
+    window.stickerNumber = 0;
+    window.saved = 'yes';
 
     // Save current settings to cookies before starting the game
-    updateCookies();
+    window.updateCookies();
 
     // Redirect to the game page
-    window.location.href = './the_numbers.html';
+    // window.location.href = './the_numbers.html';
 }
 
 //****************** Cookie functions ******************
 
 // Function to update cookies with current settings
-function updateCookies() {
-    alert(`before update: ${operator} ${level} ${stickerFolder} ${starNumber} ${stickerNumber} ${saved} ${operatorView}`);
-    setCookie('stickerFolder', stickerFolder, cookieDay);
-    setCookie('operator', operator, cookieDay);
-    setCookie('starNumber', starNumber.toString(), cookieDay);
-    setCookie('stickerNumber', stickerNumber.toString(), cookieDay);
-    setCookie('level', level.toString(), cookieDay);
-    setCookie('saved', saved, cookieDay);
+window.updateCookies = function () {
+    alert(`antes de grabar: ${window.operator} ${window.level} ${window.stickerFolder} 
+        ${window.starNumber} ${window.stickerNumber} ${window.saved} ${window.operatorView}`);
+    setCookie('stickerFolder', window.stickerFolder, cookieDay);
+    setCookie('operator', window.operator, cookieDay);
+    setCookie('starNumber', window.starNumber.toString(), cookieDay);
+    setCookie('stickerNumber', window.stickerNumber.toString(), cookieDay);
+    setCookie('level', window.level.toString(), cookieDay);
+    setCookie('saved', window.saved, cookieDay);
     getAllCookies();
 }
 
 // Function to set a cookie
-function setCookie(name, value, days) {
+window.setCookie = function (name, value, days) {
     let expires = "";
     if (days) {
         const date = new Date();
@@ -78,25 +108,26 @@ function setCookie(name, value, days) {
 }
 
 // Function to get all cookies and set default values if not present
-function getAllCookies() {
-    getCookie('stickerFolder') ? stickerFolder = getCookie('stickerFolder') : stickerFolder = 'BoySticker/';
-    getCookie('operator') ? operator = getCookie('operator') : operator = '+';
-    getCookie('starNumber') ? starNumber = parseInt(getCookie('starNumber')) : starNumber = 0;
-    getCookie('stickerNumber') ? stickerNumber = parseInt(getCookie('stickerNumber')) : stickerNumber = 0;
-    getCookie('level') ? level = parseInt(getCookie('level')) : level = 10;
-    getCookie('saved') ? saved = getCookie('saved') : saved = 'no';
+window.getAllCookies = function () {
+    window.getCookie('stickerFolder') //? window.stickerFolder = getCookie('stickerFolder') : window.stickerFolder = 'BoySticker/';
+    // window.getCookie('operator') ? window.operator = getCookie('operator') : window.operator = '+';
+    // window.getCookie('starNumber') ? window.starNumber = parseInt(getCookie('starNumber')) : window.starNumber = 0;
+    // window.getCookie('stickerNumber') ? window.stickerNumber = parseInt(getCookie('stickerNumber')) : window.stickerNumber = 0;
+    // window.getCookie('level') ? window.level = parseInt(getCookie('level')) : window.level = 10;
+    // window.getCookie('saved') ? window.saved = getCookie('saved') : window.saved = 'no';
 
     // Set operatorView based on operator
-    if (operator === '+') {operatorView = '+';}
-    else if (operator === '-') {operatorView = '-';}
-    else if (operator === '*') {operatorView = '×';}
-    else if (operator === '/') {operatorView = '÷';}
+    // if (window.operator === '+') window.operatorView = '+';
+    // else if (window.operator === '-') window.operatorView = '-';
+    // else if (window.operator === '*') window.operatorView = '×';
+    // else if (window.operator === '/') window.operatorView = '÷';
 
-    alert(`after get: ${operator} ${level} ${stickerFolder} ${starNumber} ${stickerNumber} ${saved} ${operatorView}`);
+    alert(`despues de get: ${window.operator} ${window.level} ${window.stickerFolder} 
+        ${window.starNumber} ${window.stickerNumber} ${window.saved} ${window.operatorView}`);
 }
 
 // Function to get a cookie
-function getCookie(name) {
+window.getCookie = function (name) {
     try {
         // Add validation for cookie name
         if (!name || typeof name !== 'string') {
@@ -120,11 +151,263 @@ function getCookie(name) {
 }
 
 // Function to delete all cookies
-function resetCookies() {
-    setCookie('stickerFolder', 'BoySticker/', -1);
-    setCookie('operator', '+', -1);
-    setCookie('level', '10', -1);
-    setCookie('starNumber', '0', -1);
-    setCookie('stickerNumber', '0', -1);
+window.resetCookies = function () {
+    window.setCookie('stickerFolder', 'BoySticker/', -1);
+    window.setCookie('operator', '+', -1);
+    window.setCookie('level', '10', -1);
+    window.setCookie('starNumber', '0', -1);
+    window.setCookie('stickerNumber', '0', -1);
 }
 
+
+// Handle operator change from dropdown
+window.onOperatorChange = function() {
+    const op = document.getElementById('operatorSelect').value;
+    window.operator = op;
+}
+
+// Handle level change from dropdown
+window.onLevelChange = function() {
+    const lvl = document.getElementById('levelSelect').value;
+    // Level 1: 0-10, Level 2: 0-12, Level 3: 0-100
+    if (lvl === '1') window.level = 10;
+    else if (lvl === '2') window.level = 12;
+    else if (lvl === '3') window.level = 100;
+}
+
+// Handle gender change from dropdown
+window.onGenderChange = function() {
+    const gender = document.getElementById('genderSelect').value;
+    if (gender === 'boy') window.stickerFolder = 'BoySticker/';
+    else if (gender === 'girl') window.stickerFolder = 'GirlSticker/';
+}
+
+// Update the dropdown selectors to reflect current settings
+window.updateSelector = function() {
+    // Set operator selector
+    if (window.operator === '+') document.getElementById('operatorSelect').value = '+';
+    else if (window.operator === '-') document.getElementById('operatorSelect').value = '-';
+    else if (window.operator === '*') document.getElementById('operatorSelect').value = '*';
+    else if (window.operator === '/') document.getElementById('operatorSelect').value = '/';
+
+    // Set level selector
+    if (window.level === 10) document.getElementById('levelSelect').value = '1';
+    else if (window.level === 12) document.getElementById('levelSelect').value = '2';
+    else if (window.level === 100) document.getElementById('levelSelect').value = '3';
+
+    // Set Gender selector
+    if (window.stickerFolder === 'BoySticker/') document.getElementById('genderSelect').value = 'boy';
+    else if (window.stickerFolder === 'GirlSticker/') document.getElementById('genderSelect').value = 'girl';
+}
+
+// Global event listeners
+window.addEventListener("resize", window.updateTemplate);
+
+// Convert all functions to global scope
+window.updateStar = function() {
+    const starContainer = document.getElementById('starContainer');
+    for (let i = 0; i < window.starNumber; i++) {
+        let img = document.createElement('img');
+        img.src = 'images/star.png';
+        img.alt = 'Star';
+        img.className = 'imgStar';
+        starContainer.appendChild(img);
+    }
+}
+
+window.updateSticker = function() {
+    const stickerContainer = document.getElementById('stickerContainer');
+    for (let i = 0; i < window.stickerNumber; i++) {
+        let img = document.createElement('img');
+        img.src = `${window.stickerFolder}${i + 1}.png`;
+        img.alt = 'Sticker';
+        img.className = 'imgSticker';
+        stickerContainer.appendChild(img);
+    }
+}
+
+window.resetNumbers = function() {
+    if (window.operator === '+') {
+        window.firstNumber = Math.floor(Math.random() * (window.level + 1));
+        window.secondNumber = Math.floor(Math.random() * (window.level - window.firstNumber + 1));
+    }
+    else if (window.operator === '-') {
+        window.firstNumber = Math.floor(Math.random() * (window.level + 1));
+        window.secondNumber = Math.floor(Math.random() * (window.firstNumber + 1));
+    }
+    else if (window.operator === '*') {
+        window.firstNumber = Math.floor(Math.random() * (window.level + 1));
+        window.secondNumber = Math.floor(Math.random() * (window.level + 1));
+    }
+    else if (window.operator === '/') {
+        window.secondNumber = Math.floor((Math.random() * window.level) + 1); // Avoid division by zero
+        window.firstNumber = window.secondNumber * (Math.floor(Math.random() * (window.level + 1)));
+    }
+    // Update the HTML elements with the new numbers and operator
+    document.getElementById('firstNumber').innerHTML = window.firstNumber;
+    document.getElementById('secondNumber').innerHTML = window.secondNumber;
+    document.getElementById('operator1').innerHTML = window.operatorView;
+    document.getElementById('operator2').innerHTML = window.operatorView;
+
+    document.getElementById('imgFirstNumber').src = `images/block.png`;
+    document.getElementById('imgSecondNumber').src = `images/block.png`;
+    document.getElementById('imgResultNumber').src = `images/block.png`;
+
+    // Reset the result display
+    document.getElementById('result').innerHTML = '';
+}
+
+// Function to handle image click events
+window.imgClick = function(element) {
+    if (element === 'imgFirstNumber') {
+        if (window.firstNumber > 12) {
+            document.getElementById(element).src = `images/13.png`;
+        }
+        else {
+            document.getElementById(element).src = `images/${window.firstNumber}.png`;
+        }
+    } else if (element === 'imgSecondNumber') {
+        if (window.secondNumber > 12) {
+            document.getElementById(element).src = `images/13.png`;
+        }
+        else {
+            document.getElementById(element).src = `images/${window.secondNumber}.png`;
+        }
+    } else if (element === 'imgResultNumber') {
+        if (eval(`${window.firstNumber} ${window.operator} ${window.secondNumber}`) > 12) {
+            document.getElementById(element).src = `images/13.png`;
+        }
+        else {
+            document.getElementById(element).src = "images/" + eval(`${window.firstNumber} ${window.operator} ${window.secondNumber}`) + ".png";
+        }
+    }
+    const intervalID = setTimeout(imgLeave, 10000, element);
+}
+
+window.imgLeave = function(element) {
+    document.getElementById(element).src = `images/block.png`;
+}
+
+window.addNumber = function(element) {
+    let result = document.getElementById('result').innerHTML;
+    result += element;
+    document.getElementById('result').innerHTML = result;
+}
+
+window.clearResult = function() {
+    document.getElementById('result').innerHTML = '';
+}
+
+window.pointerOver = function(element) {
+    document.getElementById(`${element}`).style.borderColor = 'black';
+}
+
+window.pointerLeave = function(element) {
+    document.getElementById(`${element}`).style.borderColor = 'white';
+}
+
+// Check the result when the user clicks the "Enter" button
+window.checkResult = function() {
+    // Pause all sound effects to avoid overlap
+    window.soundPositive.pause();
+    window.soundNegative.pause();
+    window.soundSticker.pause();
+
+    let result = document.getElementById('result').innerHTML;
+    const imgStar = document.getElementsByClassName('imgStar');
+    const imgSticker = document.getElementsByClassName('imgSticker');
+    const starContainer = document.getElementById('starContainer');
+    const stickerContainer = document.getElementById('stickerContainer');
+    let correctResult = eval(`${window.firstNumber} ${window.operator} ${window.secondNumber}`);
+    if (parseInt(result) === correctResult) {
+        if (imgStar.length < maxStars) {
+            window.soundPositive.currentTime = 0; // Ensure sound starts from the beginning
+            window.soundPositive.play(); // Play positive sound effect
+            let img = document.createElement('img');
+            img.src = 'images/star.png'; // Change to your actual image path
+            img.alt = 'Star';
+            img.className = 'imgStar';
+            starContainer.appendChild(img);
+        }
+        else {
+            if (imgSticker.length > maxSticker) {
+                alert(`You have already earned the maximum number of sticker! (${maxSticker})`);
+            }
+            else {
+                window.soundSticker.play(); // Play sticker sound effect
+                while (imgStar.length > 0) {
+                    imgStar[imgStar.length - 1].remove();
+                }
+                let img = document.createElement('img');
+                img.src = `${stickerFolder}${imgSticker.length}.png`; // Change to your actual image path
+                img.alt = 'Sticker';
+                img.className = 'imgSticker';
+                stickerContainer.appendChild(img);
+                alert(`See your sticker below!`);
+            }
+        }
+    } else {
+        window.soundNegative.currentTime = 0; // Ensure sound starts from the beginning
+        window.soundNegative.play(); // Play negative sound effect
+        // Show an alert with the correct answer
+        alert(`Incorrect! The correct answer is ${correctResult}.`);
+        if (imgStar.length > 0) {
+            imgStar[imgStar.length - 1].remove(); // Remove the last star if the answer is incorrect
+        }
+    }
+    starNumber = imgStar.length;
+    stickerNumber = imgSticker.length - 1; // Adjusted to match the number of stickers
+    updateCookies();
+    resetNumbers();
+}
+
+// Get keydown events for number input
+document.addEventListener("keydown", function (event) {
+    if (window.isDigit(event.key)) {
+        window.addNumber(event.key);
+    }
+    else if (event.key === 'Enter') {
+        window.checkResult();
+    }
+    else if (event.key === 'Escape') {
+        window.clearResult();
+    }
+    else if (event.key === 'Backspace' || event.key === 'Delete') {
+        let result = document.getElementById('result').innerHTML;
+        result = result.slice(0, -1); // Remove the last character
+        document.getElementById('result').innerHTML = result;
+    }
+    else if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+        // Prevent default behavior of arrow keys
+        event.preventDefault();
+    }
+});
+
+// Function to check if the key pressed is a digit
+window.isDigit = function(key) {
+    return /^[0-9]$/.test(key); // Accepts only single digits 0–9
+}
+
+// Function to get the current orientation of the device
+window.updateTemplate = function() {
+    const container = document.querySelector('.numbers-container');
+    const additionalContainer = document.querySelector('.additional-container');
+    const imageBorderLeft = document.querySelector('.imgBorderLeft');
+    const imageBorderRight = document.querySelector('.imgBorderRight');
+
+    if (window.innerHeight > window.innerWidth) {
+        //alert('Portrait');
+        container.style.gridTemplateColumns = 'auto auto auto auto auto';
+        imageBorderLeft.style.width = '0vw';
+        imageBorderRight.style.width = '0vw';
+    } else {
+        //alert('Landscape');
+        container.style.gridTemplateColumns = 'auto auto auto auto auto auto auto auto auto auto';
+        imageBorderLeft.style.width = '7vw';
+        imageBorderRight.style.width = '7vw';
+    }
+    additionalContainer.style.gridTemplateColumns = 'auto auto auto auto auto auto';
+    additionalContainer.style.gridTemplateRows = '9vw 17vw';
+    imageBorderLeft.style.height = 'auto';
+    imageBorderRight.style.height = 'auto';
+}
