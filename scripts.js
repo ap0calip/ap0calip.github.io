@@ -84,7 +84,7 @@ window.decreaseAllFontSizes = function () {
 window.updateTemplate = function () {
     const currentPage = window.getCurrentPage();
     if (currentPage === 'instruction.html') {
-        if (window.innerHeight < window.innerWidth) window.decreaseAllFontSizes()
+        // if (window.innerHeight < window.innerWidth) window.decreaseAllFontSizes()
     }
     else if (currentPage === 'the_numbers.html') {
         const container = document.querySelector('.numbers-container');
