@@ -49,14 +49,15 @@ window.getCurrentPage = function () {
 
 // Initialize the game with default settings
 window.onload = function () {
-    const currentPage = window.getCurrentPage();
     window.getAllCookies();
+    window.updateTemplate();
 
+    // Determine which page is currently loaded and update accordingly
+    const currentPage = window.getCurrentPage();
     if (currentPage === 'instruction.html') {
         window.updateSelector();
     }
     else if (currentPage === 'the_numbers.html') {
-        window.updateTemplate();
         if (window.saved === 'no') {
             window.location.href = './instruction.html';
         } else {
@@ -65,30 +66,48 @@ window.onload = function () {
             window.resetNumbers();
         }
     }
-};
+}
+
+// Function to decrease font sizes of all elements by 1px
+window.decreaseAllFontSizes = function () {
+    const allElements = document.querySelectorAll('*');
+    allElements.forEach(el => {
+        const style = window.getComputedStyle(el).getPropertyValue('font-size');
+        const currentSize = parseFloat(style);
+        if (!isNaN(currentSize) && currentSize > 1) {
+            el.style.fontSize = (currentSize - 60) + 'px';
+        }
+    });
+}
 
 // Function to get the current orientation of the device
 window.updateTemplate = function () {
-    const container = document.querySelector('.numbers-container');
-    const additionalContainer = document.querySelector('.additional-container');
-    const imageBorderLeft = document.querySelector('.imgBorderLeft');
-    const imageBorderRight = document.querySelector('.imgBorderRight');
-
-    if (window.innerHeight > window.innerWidth) {
-        //alert('Portrait');
-        container.style.gridTemplateColumns = 'auto auto auto auto auto';
-        imageBorderLeft.style.width = '0vw';
-        imageBorderRight.style.width = '0vw';
-    } else {
-        //alert('Landscape');
-        container.style.gridTemplateColumns = 'auto auto auto auto auto auto auto auto auto auto';
-        imageBorderLeft.style.width = '7vw';
-        imageBorderRight.style.width = '7vw';
+    const currentPage = window.getCurrentPage();
+    if (currentPage === 'instruction.html') {
+        if (window.innerHeight < window.innerWidth) window.decreaseAllFontSizes()
     }
-    additionalContainer.style.gridTemplateColumns = 'auto auto auto auto auto auto';
-    additionalContainer.style.gridTemplateRows = '9vw 17vw';
-    imageBorderLeft.style.height = 'auto';
-    imageBorderRight.style.height = 'auto';
+    else if (currentPage === 'the_numbers.html') {
+        const container = document.querySelector('.numbers-container');
+        const additionalContainer = document.querySelector('.additional-container');
+        const imageBorderLeft = document.querySelector('.imgBorderLeft');
+        const imageBorderRight = document.querySelector('.imgBorderRight');
+        additionalContainer.style.gridTemplateColumns = 'auto auto auto auto auto auto';
+        additionalContainer.style.gridTemplateRows = '9vw 17vw';
+        imageBorderLeft.style.height = 'auto';
+        imageBorderRight.style.height = 'auto';
+
+        if (window.innerHeight > window.innerWidth) {
+            //alert('Portrait');
+            container.style.gridTemplateColumns = 'auto auto auto auto auto';
+            imageBorderLeft.style.width = '0vw';
+            imageBorderRight.style.width = '0vw';
+        } else {
+            //alert('Landscape');
+            container.style.gridTemplateColumns = 'auto auto auto auto auto auto auto auto auto auto';
+            imageBorderLeft.style.width = '7vw';
+            imageBorderRight.style.width = '7vw';
+        }
+    }
 }
 
 // Prevent F5 key from refreshing the page

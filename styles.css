@@ -9,24 +9,36 @@
 
 h1 {
   font-size: 12vw;
-  font-weight: bold;
   font-family: "Monotype Corsiva", cursive;
   text-shadow: 1vw 1vw .1vw #72dc56;
 }
 
-.instruction-text{
+.instruction-title {
   font-size: 5vw;
   margin: 2vw;
   text-align: justify;
+  font-weight: bold;
+  margin-top: 4vw;
+}
+
+.instruction-text,
+li {
+  font-size: 5vw;
+  margin: 2vw;
+  text-align: justify;
+  font-weight: normal;
 }
 
 .footer {
   font-size: 5vw;
   margin: 2vw;
   text-align: center;
+  font-family: "Monotype Corsiva", cursive;
 }
 
-label, select, option {
+label,
+select,
+option {
   margin: 2vw;
 }
 
@@ -52,12 +64,13 @@ img {
   padding: 0.5vw;
 }
 
-.numbers-container, .additional-container {
-    display: grid;
-    padding: 0.5vw;
+.numbers-container,
+.additional-container {
+  display: grid;
+  padding: 0.5vw;
 }
 
-.numbers-container > div {
+.numbers-container>div {
   background-color: yellow;
   border: 0.2vw solid white;
   margin: 0.5vw;
