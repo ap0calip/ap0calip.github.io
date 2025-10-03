@@ -421,7 +421,7 @@ window.checkResult = function () {
                 img.alt = 'Sticker';
                 img.className = 'imgSticker';
                 stickerContainer.appendChild(img);
-                alert(`See your sticker below!`);
+                alert(`Good job! 😊 See your sticker below!`);
             }
         }
     } else {
