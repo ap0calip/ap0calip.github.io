@@ -1,12 +1,13 @@
 // File: scripts.js
-// --- a/file:///c%3A/GitHub/ap0calip.github.io/scripts.js
-// +++ b/file:///c%3A/GitHub/ap0calip.github.io/scripts.js
-// @@ -1,3 +1,4 @@
 
 // Prevent the browser from navigating away without confirmation
 // window.addEventListener('beforeunload', function (e) {
 //   e.preventDefault();
 // });
+
+//-----------------------------------------------------------------
+//   Global constants and variables
+//-----------------------------------------------------------------
 
 // Global constants
 window.maxStars = 8;      // Maximum number of stars allowed
@@ -24,10 +25,21 @@ window.firstNumber = 0;      // First number in the equation
 window.secondNumber = 0;     // Second number in the equation
 window.saved = 'no';         // Flag to indicate if settings have been saved
 
+//-----------------------------------------------------------------
+//   Sound effects and utility functions
+//-----------------------------------------------------------------
+
 // Sound effects
 window.soundPositive = new Audio('sound/sound_positive.mp3');
 window.soundNegative = new Audio('sound/sound_negative.mp3');
 window.soundSticker = new Audio('sound/sound_sticker.mp3');
+
+//-----------------------------------------------------------------
+//   Page initialization and event listeners
+//-----------------------------------------------------------------
+
+// Global event listeners
+window.addEventListener("resize", window.updateTemplate);
 
 // Function to determine current page
 window.getCurrentPage = function () {
@@ -42,7 +54,6 @@ window.onload = function () {
 
     if (currentPage === 'instruction.html') {
         window.updateSelector();
-        alert('instruction');
     }
     else if (currentPage === 'the_numbers.html') {
         window.updateTemplate();
@@ -53,9 +64,32 @@ window.onload = function () {
             window.updateSticker();
             window.resetNumbers();
         }
-        alert('the_numbers');
     }
 };
+
+// Function to get the current orientation of the device
+window.updateTemplate = function () {
+    const container = document.querySelector('.numbers-container');
+    const additionalContainer = document.querySelector('.additional-container');
+    const imageBorderLeft = document.querySelector('.imgBorderLeft');
+    const imageBorderRight = document.querySelector('.imgBorderRight');
+
+    if (window.innerHeight > window.innerWidth) {
+        //alert('Portrait');
+        container.style.gridTemplateColumns = 'auto auto auto auto auto';
+        imageBorderLeft.style.width = '0vw';
+        imageBorderRight.style.width = '0vw';
+    } else {
+        //alert('Landscape');
+        container.style.gridTemplateColumns = 'auto auto auto auto auto auto auto auto auto auto';
+        imageBorderLeft.style.width = '7vw';
+        imageBorderRight.style.width = '7vw';
+    }
+    additionalContainer.style.gridTemplateColumns = 'auto auto auto auto auto auto';
+    additionalContainer.style.gridTemplateRows = '9vw 17vw';
+    imageBorderLeft.style.height = 'auto';
+    imageBorderRight.style.height = 'auto';
+}
 
 // Prevent F5 key from refreshing the page
 // This is useful for preventing accidental page refreshes during gameplay
@@ -68,6 +102,10 @@ document.addEventListener('keydown', function (event) {
     }
 });
 
+//-----------------------------------------------------------------
+//   Game start function
+//-----------------------------------------------------------------
+
 window.startGame = function () {
     // reset star and sticker cookies
     window.starNumber = 0;
@@ -78,22 +116,21 @@ window.startGame = function () {
     window.updateCookies();
 
     // Redirect to the game page
-    // window.location.href = './the_numbers.html';
+    window.location.href = './the_numbers.html';
 }
 
-//****************** Cookie functions ******************
+//-----------------------------------------------------------------
+//   Cookie management functions
+//-----------------------------------------------------------------
 
 // Function to update cookies with current settings
 window.updateCookies = function () {
-    alert(`antes de grabar: ${window.operator} ${window.level} ${window.stickerFolder} 
-        ${window.starNumber} ${window.stickerNumber} ${window.saved} ${window.operatorView}`);
     setCookie('stickerFolder', window.stickerFolder, cookieDay);
     setCookie('operator', window.operator, cookieDay);
     setCookie('starNumber', window.starNumber.toString(), cookieDay);
     setCookie('stickerNumber', window.stickerNumber.toString(), cookieDay);
     setCookie('level', window.level.toString(), cookieDay);
     setCookie('saved', window.saved, cookieDay);
-    getAllCookies();
 }
 
 // Function to set a cookie
@@ -109,21 +146,12 @@ window.setCookie = function (name, value, days) {
 
 // Function to get all cookies and set default values if not present
 window.getAllCookies = function () {
-    window.getCookie('stickerFolder') //? window.stickerFolder = getCookie('stickerFolder') : window.stickerFolder = 'BoySticker/';
-    // window.getCookie('operator') ? window.operator = getCookie('operator') : window.operator = '+';
-    // window.getCookie('starNumber') ? window.starNumber = parseInt(getCookie('starNumber')) : window.starNumber = 0;
-    // window.getCookie('stickerNumber') ? window.stickerNumber = parseInt(getCookie('stickerNumber')) : window.stickerNumber = 0;
-    // window.getCookie('level') ? window.level = parseInt(getCookie('level')) : window.level = 10;
-    // window.getCookie('saved') ? window.saved = getCookie('saved') : window.saved = 'no';
-
-    // Set operatorView based on operator
-    // if (window.operator === '+') window.operatorView = '+';
-    // else if (window.operator === '-') window.operatorView = '-';
-    // else if (window.operator === '*') window.operatorView = '×';
-    // else if (window.operator === '/') window.operatorView = '÷';
-
-    alert(`despues de get: ${window.operator} ${window.level} ${window.stickerFolder} 
-        ${window.starNumber} ${window.stickerNumber} ${window.saved} ${window.operatorView}`);
+    window.getCookie('stickerFolder') ? window.stickerFolder = getCookie('stickerFolder') : window.stickerFolder = 'BoySticker/';
+    window.getCookie('operator') ? window.operator = getCookie('operator') : window.operator = '+';
+    window.getCookie('starNumber') ? window.starNumber = parseInt(getCookie('starNumber')) : window.starNumber = 0;
+    window.getCookie('stickerNumber') ? window.stickerNumber = parseInt(getCookie('stickerNumber')) : window.stickerNumber = 0;
+    window.getCookie('level') ? window.level = parseInt(getCookie('level')) : window.level = 10;
+    window.getCookie('saved') ? window.saved = getCookie('saved') : window.saved = 'no';
 }
 
 // Function to get a cookie
@@ -159,15 +187,18 @@ window.resetCookies = function () {
     window.setCookie('stickerNumber', '0', -1);
 }
 
+//-----------------------------------------------------------------
+//   Event handlers for dropdown changes and UI updates
+//-----------------------------------------------------------------
 
 // Handle operator change from dropdown
-window.onOperatorChange = function() {
+window.onOperatorChange = function () {
     const op = document.getElementById('operatorSelect').value;
     window.operator = op;
 }
 
 // Handle level change from dropdown
-window.onLevelChange = function() {
+window.onLevelChange = function () {
     const lvl = document.getElementById('levelSelect').value;
     // Level 1: 0-10, Level 2: 0-12, Level 3: 0-100
     if (lvl === '1') window.level = 10;
@@ -176,14 +207,14 @@ window.onLevelChange = function() {
 }
 
 // Handle gender change from dropdown
-window.onGenderChange = function() {
+window.onGenderChange = function () {
     const gender = document.getElementById('genderSelect').value;
     if (gender === 'boy') window.stickerFolder = 'BoySticker/';
     else if (gender === 'girl') window.stickerFolder = 'GirlSticker/';
 }
 
 // Update the dropdown selectors to reflect current settings
-window.updateSelector = function() {
+window.updateSelector = function () {
     // Set operator selector
     if (window.operator === '+') document.getElementById('operatorSelect').value = '+';
     else if (window.operator === '-') document.getElementById('operatorSelect').value = '-';
@@ -200,11 +231,12 @@ window.updateSelector = function() {
     else if (window.stickerFolder === 'GirlSticker/') document.getElementById('genderSelect').value = 'girl';
 }
 
-// Global event listeners
-window.addEventListener("resize", window.updateTemplate);
+//-----------------------------------------------------------------
+//   Game logic and UI interaction functions
+//-----------------------------------------------------------------
 
 // Convert all functions to global scope
-window.updateStar = function() {
+window.updateStar = function () {
     const starContainer = document.getElementById('starContainer');
     for (let i = 0; i < window.starNumber; i++) {
         let img = document.createElement('img');
@@ -215,7 +247,7 @@ window.updateStar = function() {
     }
 }
 
-window.updateSticker = function() {
+window.updateSticker = function () {
     const stickerContainer = document.getElementById('stickerContainer');
     for (let i = 0; i < window.stickerNumber; i++) {
         let img = document.createElement('img');
@@ -226,7 +258,14 @@ window.updateSticker = function() {
     }
 }
 
-window.resetNumbers = function() {
+window.resetNumbers = function () {
+    // Set operatorView based on operator
+    if (window.operator === '+') window.operatorView = '+';
+    else if (window.operator === '-') window.operatorView = '-';
+    else if (window.operator === '*') window.operatorView = '×';
+    else if (window.operator === '/') window.operatorView = '÷';
+
+    // Generate two random numbers based on the selected operator and level
     if (window.operator === '+') {
         window.firstNumber = Math.floor(Math.random() * (window.level + 1));
         window.secondNumber = Math.floor(Math.random() * (window.level - window.firstNumber + 1));
@@ -243,12 +282,14 @@ window.resetNumbers = function() {
         window.secondNumber = Math.floor((Math.random() * window.level) + 1); // Avoid division by zero
         window.firstNumber = window.secondNumber * (Math.floor(Math.random() * (window.level + 1)));
     }
+
     // Update the HTML elements with the new numbers and operator
     document.getElementById('firstNumber').innerHTML = window.firstNumber;
     document.getElementById('secondNumber').innerHTML = window.secondNumber;
     document.getElementById('operator1').innerHTML = window.operatorView;
     document.getElementById('operator2').innerHTML = window.operatorView;
 
+    // Reset the images to block
     document.getElementById('imgFirstNumber').src = `images/block.png`;
     document.getElementById('imgSecondNumber').src = `images/block.png`;
     document.getElementById('imgResultNumber').src = `images/block.png`;
@@ -258,7 +299,7 @@ window.resetNumbers = function() {
 }
 
 // Function to handle image click events
-window.imgClick = function(element) {
+window.imgClick = function (element) {
     if (element === 'imgFirstNumber') {
         if (window.firstNumber > 12) {
             document.getElementById(element).src = `images/13.png`;
@@ -284,41 +325,46 @@ window.imgClick = function(element) {
     const intervalID = setTimeout(imgLeave, 10000, element);
 }
 
-window.imgLeave = function(element) {
+window.imgLeave = function (element) {
     document.getElementById(element).src = `images/block.png`;
 }
 
-window.addNumber = function(element) {
+window.addNumber = function (element) {
     let result = document.getElementById('result').innerHTML;
     result += element;
     document.getElementById('result').innerHTML = result;
 }
 
-window.clearResult = function() {
+window.clearResult = function () {
     document.getElementById('result').innerHTML = '';
 }
 
-window.pointerOver = function(element) {
+window.pointerOver = function (element) {
     document.getElementById(`${element}`).style.borderColor = 'black';
 }
 
-window.pointerLeave = function(element) {
+window.pointerLeave = function (element) {
     document.getElementById(`${element}`).style.borderColor = 'white';
 }
 
 // Check the result when the user clicks the "Enter" button
-window.checkResult = function() {
+window.checkResult = function () {
     // Pause all sound effects to avoid overlap
     window.soundPositive.pause();
     window.soundNegative.pause();
     window.soundSticker.pause();
 
+    // Get the user's answer from the result display
     let result = document.getElementById('result').innerHTML;
     const imgStar = document.getElementsByClassName('imgStar');
     const imgSticker = document.getElementsByClassName('imgSticker');
     const starContainer = document.getElementById('starContainer');
     const stickerContainer = document.getElementById('stickerContainer');
+
+    // Calculate the correct answer
     let correctResult = eval(`${window.firstNumber} ${window.operator} ${window.secondNumber}`);
+
+    // Check if the user's answer is correct
     if (parseInt(result) === correctResult) {
         if (imgStar.length < maxStars) {
             window.soundPositive.currentTime = 0; // Ensure sound starts from the beginning
@@ -384,30 +430,6 @@ document.addEventListener("keydown", function (event) {
 });
 
 // Function to check if the key pressed is a digit
-window.isDigit = function(key) {
+window.isDigit = function (key) {
     return /^[0-9]$/.test(key); // Accepts only single digits 0–9
-}
-
-// Function to get the current orientation of the device
-window.updateTemplate = function() {
-    const container = document.querySelector('.numbers-container');
-    const additionalContainer = document.querySelector('.additional-container');
-    const imageBorderLeft = document.querySelector('.imgBorderLeft');
-    const imageBorderRight = document.querySelector('.imgBorderRight');
-
-    if (window.innerHeight > window.innerWidth) {
-        //alert('Portrait');
-        container.style.gridTemplateColumns = 'auto auto auto auto auto';
-        imageBorderLeft.style.width = '0vw';
-        imageBorderRight.style.width = '0vw';
-    } else {
-        //alert('Landscape');
-        container.style.gridTemplateColumns = 'auto auto auto auto auto auto auto auto auto auto';
-        imageBorderLeft.style.width = '7vw';
-        imageBorderRight.style.width = '7vw';
-    }
-    additionalContainer.style.gridTemplateColumns = 'auto auto auto auto auto auto';
-    additionalContainer.style.gridTemplateRows = '9vw 17vw';
-    imageBorderLeft.style.height = 'auto';
-    imageBorderRight.style.height = 'auto';
 }

@@ -2,25 +2,26 @@
   "name": "The Numbers PWA forcomputer",
   "short_name": "TheNumbers",
   "icons": [
-      {
-          "src": "https://ap0calip.github.io/images/512x512.png",
-          "sizes": "512x512",
-          "type": "image/png",
-          "purpose": "maskable"
-      },
-      {
-          "src": "https://ap0calip.github.io/images/192x192.png",
-          "sizes": "192x192",
-          "type": "image/png",
-          "purpose": "any"
-      }
+    {
+      "src": "https://ap0calip.github.io/images/512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "https://ap0calip.github.io/images/192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    }
   ],
   "start_url": "https://ap0calip.github.io/the_numbers.html",
   "display": "standalone",
-  "display_override": ["window-controls-overlay"], 
+  "display_override": [
+    "window-controls-overlay"
+  ],
   "prefer_related_applications": false,
-
-"related_applications": [],
+  "related_applications": [],
   "serviceworker": {
     "src": "/service-worker.js",
     "scope": "/",
@@ -31,8 +32,9 @@
   "precache_urls": [
     "/",
     "/the_numbers.html",
-    "/styles_the_numbers.css",
-    "/scripts_the_numbers.js",
+    "/instruction.html",
+    "/styles.css",
+    "/scripts.js",
     "/images/192x192.png",
     "/images/512x512.png",
     "/images/0.png",
