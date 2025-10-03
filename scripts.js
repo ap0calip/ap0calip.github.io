@@ -387,6 +387,12 @@ window.checkResult = function () {
     const starContainer = document.getElementById('starContainer');
     const stickerContainer = document.getElementById('stickerContainer');
 
+    // Check if the result is empty
+    if (result === '') {
+        alert('Please enter your answer first!');
+        return; // Exit the function if no answer is provided
+    }
+    
     // Calculate the correct answer
     let correctResult = eval(`${window.firstNumber} ${window.operator} ${window.secondNumber}`);
 
