@@ -39,7 +39,7 @@ window.soundSticker = new Audio('sound/sound_sticker.mp3');
 //-----------------------------------------------------------------
 
 // Global event listeners
-window.addEventListener("resize", window.updateTemplate);
+window.addEventListener("resize", handleResize);
 
 // Function to determine current page
 window.getCurrentPage = function () {
@@ -50,7 +50,7 @@ window.getCurrentPage = function () {
 // Initialize the game with default settings
 window.onload = function () {
     window.getAllCookies();
-    window.updateTemplate();
+    window.handleResize();
 
     // Determine which page is currently loaded and update accordingly
     const currentPage = window.getCurrentPage();
@@ -80,11 +80,18 @@ window.decreaseAllFontSizes = function () {
     });
 }
 
+// Function to check if the device is mobile
+window.isMobile = function () {
+    return /Mobi|Android|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i.test(navigator.userAgent);
+}
+
 // Function to get the current orientation of the device
-window.updateTemplate = function () {
+function handleResize() {
     const currentPage = window.getCurrentPage();
     if (currentPage === 'instruction.html') {
-        // if (window.innerHeight < window.innerWidth) window.decreaseAllFontSizes()
+        if (!window.isMobile()) {
+            // if (window.innerHeight < window.innerWidth) window.decreaseAllFontSizes()
+        }
     }
     else if (currentPage === 'the_numbers.html') {
         const container = document.querySelector('.numbers-container');
