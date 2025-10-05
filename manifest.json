@@ -21,7 +21,6 @@
     "window-controls-overlay"
   ],
   "prefer_related_applications": false,
-  "related_applications": [],
   "serviceworker": {
     "src": "/service-worker.js",
     "scope": "/",
@@ -81,5 +80,15 @@
     "/GirlSticker/10.png",
     "/GirlSticker/11.png",
     "/GirlSticker/12.png"
+  ],
+  "theme_color": "#000000",
+  "background_color": "#000000",
+  "dir": "ltr",
+  "lang": "en",
+  "orientation": "any",
+  "scope": "https://ap0calip.github.io/",
+  "categories": [
+    "education",
+    "games"
   ]
 }
