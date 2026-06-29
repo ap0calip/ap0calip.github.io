@@ -32,7 +32,7 @@
       "title": "MedRed: Medication Reminder",
       "category": "Play Store",
       "description": "Medication Reminder - family's medicine schedules",
-      "longDescription": "MedRem is a thoughtful, family-centered medical reminder and medication safety companion. Designed with an ambient, eye-safe slate theme and generous visual breathing room, the application simplifies schedule coordination for individuals, parents, and caregivers alike. Whether managing a single daily multivitamin or coordinating complex prescriptions for multiple family members, MedRem offers a visually organized, stress-free dashboard that keeps health routines on track.",
+      "longDescription": "MedRem is a friendly, family-focused medication tracker designed to make managing health routines completely effortless. Whether you are tracking daily vitamins for yourself, managing complex prescriptions for a loved one, or keeping tabs on children's health schedules, MedRem brings everything together in one organized, easy-to-use space. By supporting multiple family profiles under a single roof, the app ensures that everyone's wellness journey is coordinated, visible, and never forgotten.",
       "technologies": ["Google AI Studio"],
       "features": [
         "Color-Coded Family Profiles: Create distinct, personalized profiles for everyone in your care. Each profile is assigned a unique, vibrant color code that visually groups and organizes schedules, helping you quickly distinguish whose medications are due at any given moment.",
