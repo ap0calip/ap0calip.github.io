@@ -145,7 +145,8 @@
       "githubUrl": "https://github.com/ap0calip",
       "releaseDate": "July 30, 2025",
       "screenshots": [
-        "/image/the_numbers_pwa_microsoft/1.png",
+        "/image/the_numbers_pwa_microsoft/logo.png",
+		"/image/the_numbers_pwa_microsoft/1.png",
         "/image/the_numbers_pwa_microsoft/2.png",
         "/image/the_numbers_pwa_microsoft/3.png"
       ]
