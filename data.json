@@ -2,6 +2,61 @@
   "applications": [
     {
       "id": 1,
+      "title": "The Numbers",
+      "category": "Play Store",
+      "description": "Welcome to The Numbers — the fun, visual, and friendly way for young learners to build a rock-solid foundation in basic math!",
+      "longDescription": "Welcome to The Numbers — the fun, visual, and friendly way for young learners to build a rock-solid foundation in basic math! Designed specifically for kids and elementary students, The Numbers makes learning arithmetic engaging, intuitive, and stress-free. Whether your child is just starting out with counting or sharpening their math skills, this app provides a safe, distraction-free environment to practice and excel.",
+      "technologies": [
+        "Google AI Studio"
+      ],
+      "features": [
+        "Interactive Visual Aids (Up to 12)",
+        "Free Practice & Quiz Modes",
+        "Collectible Sticker Album",
+        "Local Score Tracking"
+      ],
+      "appUrl": "https://play.google.com/store/apps/details?id=com.aistudio.mathcounting.qxzlm",
+      "githubUrl": "https://github.com/ap0calip/The-Numbers-Android",
+      "releaseDate": "Sep 10, 2026",
+      "screenshots": [
+        "image/the_numbers_play/logo.png",
+        "image/the_numbers_play/a1.jpg",
+        "image/the_numbers_play/a2.jpg",
+        "image/the_numbers_play/a3.jpg",
+        "image/the_numbers_play/a4.jpg",
+        "image/the_numbers_play/a5.jpg",
+        "image/the_numbers_play/a6.jpg"
+      ]
+    },
+    {
+      "id": 2,
+      "title": "MedRed: Medication Reminder",
+      "category": "Play Store",
+      "description": "Medication Reminder - family's medicine schedules",
+      "longDescription": "MedRem is a friendly, family-focused medication tracker designed to make managing health routines completely effortless. Whether you are tracking daily vitamins for yourself, managing complex prescriptions for a loved one, or keeping tabs on children's health schedules, MedRem brings everything together in one organized, easy-to-use space. By supporting multiple family profiles under a single roof, the app ensures that everyone's wellness journey is coordinated, visible, and never forgotten.",
+      "technologies": [
+        "Google AI Studio"
+      ],
+      "features": [
+        "Color-Coded Family Profiles: Create distinct, personalized profiles for everyone in your care. Each profile is assigned a unique, vibrant color code that visually groups and organizes schedules, helping you quickly distinguish whose medications are due at any given moment.",
+        "Detailed Medication History Log: Keep an accurate, organized digital diary of past doses. The dedicated history timeline tracks exact timestamps and actions (such as taken or skipped doses) across all profiles, giving you a reliable record to share during doctor visits."
+      ],
+      "appUrl": "https://play.google.com/store/apps/details?id=com.aistudio.medred.kfsqwz",
+      "githubUrl": "https://github.com/ap0calip/MedRem",
+      "releaseDate": "Jul 30, 2026",
+      "screenshots": [
+        "/image/medrem/1024x500.png",
+        "/image/medrem/phone1.jpg",
+        "/image/medrem/phone2.jpg",
+        "/image/medrem/phone3.jpg",
+        "/image/medrem/phone4.jpg",
+        "/image/medrem/phone5.jpg",
+        "/image/medrem/phone6.jpg",
+        "/image/medrem/phone7.jpg"
+      ]
+    },
+    {
+      "id": 3,
       "title": "Libreta de Dominó Boricua",
       "category": "Play Store",
       "description": "¡Olvídate del papel! Anota tu dominó de la forma más rápida y boricua.",
@@ -16,11 +71,10 @@
         "Interfaz Temática Boricua: Disfruta de una experiencia visual elegante y fluida con un diseño responsivo basado en los colores tradicionales."
       ],
       "appUrl": "https://play.google.com/store/apps/details?id=com.aistudio.dominoboricua.kxmpzq",
-      "githubUrl": "https://github.com/ap0calip",
+      "githubUrl": "https://github.com/ap0calip/Libreta-de-Domin-PR",
       "releaseDate": "July 22, 2026",
       "screenshots": [
         "image/domino/bx.png",
-        "image/domino/b0.png",
         "image/domino/Espanol/esp (1).jpg",
         "image/domino/Espanol/esp (2).jpg",
         "image/domino/Espanol/esp (3).jpg",
@@ -38,35 +92,7 @@
       ]
     },
     {
-      "id": 2,
-      "title": "MedRed: Medication Reminder",
-      "category": "Play Store",
-      "description": "Medication Reminder - family's medicine schedules",
-      "longDescription": "MedRem is a friendly, family-focused medication tracker designed to make managing health routines completely effortless. Whether you are tracking daily vitamins for yourself, managing complex prescriptions for a loved one, or keeping tabs on children's health schedules, MedRem brings everything together in one organized, easy-to-use space. By supporting multiple family profiles under a single roof, the app ensures that everyone's wellness journey is coordinated, visible, and never forgotten.",
-      "technologies": [
-        "Google AI Studio"
-      ],
-      "features": [
-        "Color-Coded Family Profiles: Create distinct, personalized profiles for everyone in your care. Each profile is assigned a unique, vibrant color code that visually groups and organizes schedules, helping you quickly distinguish whose medications are due at any given moment.",
-        "Detailed Medication History Log: Keep an accurate, organized digital diary of past doses. The dedicated history timeline tracks exact timestamps and actions (such as taken or skipped doses) across all profiles, giving you a reliable record to share during doctor visits."
-      ],
-      "appUrl": "https://play.google.com/store/apps/details?id=com.aistudio.medred.kfsqwz",
-      "githubUrl": "https://github.com/ap0calip",
-      "releaseDate": "Jul 30, 2026",
-      "screenshots": [
-        "/image/medrem/1024x500.png",
-        "/image/medrem/banner_eng.png",
-        "/image/medrem/phone1.jpg",
-        "/image/medrem/phone2.jpg",
-        "/image/medrem/phone3.jpg",
-        "/image/medrem/phone4.jpg",
-        "/image/medrem/phone5.jpg",
-        "/image/medrem/phone6.jpg",
-        "/image/medrem/phone7.jpg"
-      ]
-    },
-    {
-      "id": 3,
+      "id": 4,
       "title": "The Numbers forcomputer",
       "category": "Microsoft Store",
       "description": "This application is created so that children can practice addition, subtraction, multiplication, and division more interestingly.",
@@ -83,7 +109,7 @@
         "Practice Division in level 10 and 12."
       ],
       "appUrl": "https://apps.microsoft.com/detail/9nqz63lkldpp?hl=en-US&gl=US",
-      "githubUrl": "https://github.com/ap0calip",
+      "githubUrl": "https://github.com/ap0calip/The-Numbers-WinForms",
       "releaseDate": "June 27, 2019",
       "screenshots": [
         "/image/the_numbers_winforms/BoxArt.png",
@@ -94,7 +120,7 @@
       ]
     },
     {
-      "id": 4,
+      "id": 5,
       "title": "The Numbers",
       "category": "Webpage",
       "description": "This application is created so that children can practice addition, subtraction, multiplication, and division more interestingly.",
@@ -113,7 +139,7 @@
         "Practice Division in level 10 and 12."
       ],
       "appUrl": "https://ap0calip.github.io/the_numbers.html",
-      "githubUrl": "https://github.com/ap0calip",
+      "githubUrl": "https://github.com/ap0calip/The-Numbers-web",
       "releaseDate": "2025",
       "screenshots": [
         "/image/the_numbers_web/1.png",
@@ -122,7 +148,7 @@
       ]
     },
     {
-      "id": 5,
+      "id": 6,
       "title": "The Numbers PWA forcomputer",
       "category": "Microsoft Store",
       "description": "This application is created so that children can practice addition, subtraction, multiplication, and division in a more interesting way.",
@@ -145,13 +171,13 @@
       "releaseDate": "July 30, 2025",
       "screenshots": [
         "/image/the_numbers_pwa_microsoft/logo.png",
-		"/image/the_numbers_pwa_microsoft/1.png",
+		    "/image/the_numbers_pwa_microsoft/1.png",
         "/image/the_numbers_pwa_microsoft/2.png",
         "/image/the_numbers_pwa_microsoft/3.png"
       ]
     },
     {
-      "id": 6,
+      "id": 7,
       "title": "The Numbers PWA forcomputer",
       "category": "Play Store",
       "description": "This application is created so that children can practice addition, subtraction, multiplication, and division in a more interesting way.",
